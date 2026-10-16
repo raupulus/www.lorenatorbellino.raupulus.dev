@@ -533,14 +533,25 @@ def build_index():
             <!-- Footer Card Action -->
             <div class="px-6 pb-6 pt-2 flex items-center justify-between border-t border-torbellino-sand/60">
               <button @click="openModal(song)" 
-                      class="text-xs font-black text-torbellino-coral hover:text-torbellino-wine transition flex items-center gap-1">
-                <span>Ver letra y detalles</span>
-                <span>→</span>
+                      class="text-xs font-black transition flex items-center gap-1.5"
+                      :class="song.has_video ? 'text-torbellino-coral hover:text-torbellino-wine' : 'text-[#8A6D7D] hover:text-torbellino-coral'">
+                <template x-if="song.has_video">
+                  <span class="flex items-center gap-1">
+                    <span>Ver letra y detalles</span>
+                    <span>→</span>
+                  </span>
+                </template>
+                <template x-if="!song.has_video">
+                  <span class="flex items-center gap-1.5 bg-torbellino-sand/60 px-3 py-1 rounded-full text-[11px] font-extrabold text-[#5C4550]">
+                    <span>⚡ Próximamente</span>
+                    <span>→</span>
+                  </span>
+                </template>
               </button>
 
               <a :href="song.youtube_url" target="_blank" rel="noopener noreferrer" 
                  class="p-2 rounded-xl bg-torbellino-cream hover:bg-torbellino-sand text-torbellino-plum transition" 
-                 title="Ver en YouTube">
+                 :title="song.has_video ? 'Ver videoclip en YouTube' : 'Ver canal de YouTube'">
                 <svg class="w-4 h-4 text-red-600 fill-current" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
               </a>
             </div>
@@ -598,7 +609,7 @@ def build_index():
             <a :href="activeSong.youtube_url" target="_blank" rel="noopener noreferrer" 
                class="inline-flex items-center gap-2 bg-gradient-to-r from-red-600 to-red-700 text-white text-xs font-black px-4 py-2 rounded-full shadow-lg hover:scale-105 transition">
               <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
-              <span>Ver videoclip en YouTube</span>
+              <span x-text="activeSong.has_video ? 'Ver videoclip en YouTube' : 'Ir al canal oficial de YouTube'"></span>
             </a>
           </div>
         </div>
@@ -609,11 +620,23 @@ def build_index():
           <p class="text-xs sm:text-sm text-[#4A3842] leading-relaxed bg-torbellino-cream p-4 rounded-2xl border border-torbellino-sand" x-text="activeSong.synopsis"></p>
         </div>
 
-        <!-- Lyrics Section -->
-        <div>
-          <h4 class="text-xs font-black text-torbellino-plum uppercase tracking-wider mb-2">Letra Oficial</h4>
-          <div class="bg-gray-50 rounded-2xl p-5 border border-torbellino-sand text-xs sm:text-sm font-normal text-[#291C22] whitespace-pre-line leading-relaxed max-h-60 overflow-y-auto" x-text="activeSong.lyrics || 'Letra en proceso de publicación oficial.'"></div>
-        </div>
+        <!-- Lyrics Section (Solo para canciones estrenadas/publicadas) -->
+        <template x-if="activeSong.has_video">
+          <div>
+            <h4 class="text-xs font-black text-torbellino-plum uppercase tracking-wider mb-2">Letra Oficial</h4>
+            <div class="bg-gray-50 rounded-2xl p-5 border border-torbellino-sand text-xs sm:text-sm font-normal text-[#291C22] whitespace-pre-line leading-relaxed max-h-60 overflow-y-auto" x-text="activeSong.lyrics || 'Letra en proceso de publicación oficial.'"></div>
+          </div>
+        </template>
+
+        <template x-if="!activeSong.has_video">
+          <div class="bg-gradient-to-r from-torbellino-cream to-torbellino-peach/20 rounded-2xl p-5 border border-torbellino-sand/80 text-center space-y-2">
+            <span class="text-2xl">🔒</span>
+            <h4 class="text-xs font-black text-torbellino-plum uppercase tracking-wider">Letra y Videoclip Próximamente</h4>
+            <p class="text-xs text-[#6B5660] max-w-md mx-auto leading-relaxed">
+              Este tema aún no se ha estrenado oficialmente. La letra y el videoclip completo estarán disponibles tras su publicación en el canal de YouTube.
+            </p>
+          </div>
+        </template>
 
       </div>
 

@@ -120,14 +120,21 @@ Toda nueva canción añadida debe respetar esta estructura exacta:
   "relato_id": "viejoven",
   "relato_label": "Crisis de Viejoven",
   "synopsis": "Gancho cómico descriptivo de 2-3 líneas sobre lo que le ocurre a Lorena.",
-  "lyrics": "Letra completa de la canción...",
+  "lyrics": "Letra completa de la canción (VACÍO \"\" SI NO TIENE VIDEOCLIP/SUBIDA)",
   "has_video": true,
   "has_custom_cover": true,
   "cover_image": "assets/images/covers/cdX-nombre-limpio-de-la-cancion.jpg",
   "youtube_id": "",
-  "youtube_url": "https://www.youtube.com/results?search_query=..."
+  "youtube_url": "https://www.youtube.com/results?search_query=... (O https://www.youtube.com/@LorenaTorbellino si has_video es false)"
 }
 ```
+
+> [!IMPORTANT]
+> **REGLA DE SPOILERS Y CANCIONES NO ESTRENADAS (`has_video: false`):**
+> Para las canciones que aún no tienen videoclip oficial subido a YouTube:
+> 1. **CERO SPOILERS DE LETRA:** El campo `"lyrics"` en `data/songs.json` DEBE ser una cadena vacía `""`. El modal web muestra un aviso de próximo estreno (`⚡ Próximamente`) sin desvelar la letra.
+> 2. **ENLACE A YOUTUBE:** Su `"youtube_url"` debe apuntar al perfil oficial del canal (`https://www.youtube.com/@LorenaTorbellino`), no a búsquedas ni vídeos inexistentes.
+> 3. **BOTÓN DE TARJETA:** En el catálogo muestra `⚡ Próximamente` en lugar de `Ver letra y detalles`.
 
 ### 4.3. Flujo Automatizado de Sincronización y Compilación
 Cuando se agreguen canciones o portadas en el directorio de producción de videoclips:

@@ -113,9 +113,15 @@ for album_name, alb_meta in albums_info.items():
         }
         default_cover = album_cover_map.get(alb_meta['id'], 'assets/images/lorena_avatar.jpg')
 
-        # Enlace directo al videoclip específico o búsqueda directa del vídeo en YouTube
-        yt_search_query = urllib.parse.quote_plus(f"{clean_title} Lorena Torbellino")
-        direct_yt_url = f"https://www.youtube.com/results?search_query={yt_search_query}"
+        # Enlace directo al videoclip si está subido/producido, o al perfil oficial si aún no se ha publicado
+        if has_video:
+            yt_search_query = urllib.parse.quote_plus(f"{clean_title} Lorena Torbellino")
+            direct_yt_url = f"https://www.youtube.com/results?search_query={yt_search_query}"
+            published_lyrics = lyrics
+        else:
+            # Canciones no publicadas: perfil oficial de YouTube y sin spoiler de letra
+            direct_yt_url = "https://www.youtube.com/@LorenaTorbellino"
+            published_lyrics = ""
 
         song_entry = {
             "id": global_id,
@@ -131,7 +137,7 @@ for album_name, alb_meta in albums_info.items():
             "relato_id": relato_id,
             "relato_label": relato_label,
             "synopsis": synopsis,
-            "lyrics": lyrics,
+            "lyrics": published_lyrics,
             "has_video": has_video,
             "has_custom_cover": has_custom_cover,
             "cover_image": f"assets/images/covers/{cover_filename}" if has_custom_cover else default_cover,
