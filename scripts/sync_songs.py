@@ -14,10 +14,9 @@ VIDEOCLIPS_DIR = os.environ.get(
     os.path.abspath(os.path.join(PROJECT_DIR, "..", "Lorena", "videoclips"))
 )
 COVERS_DEST = os.path.join(PROJECT_DIR, "public", "assets", "images", "covers")
-DATA_FILE = os.path.join(PROJECT_DIR, "data", "songs.json")
+DATA_FILE = os.path.join(PROJECT_DIR, "songs.json")
 
 os.makedirs(COVERS_DEST, exist_ok=True)
-os.makedirs(os.path.dirname(DATA_FILE), exist_ok=True)
 
 def slugify(text):
     text = unicodedata.normalize('NFKD', text).encode('ascii', 'ignore').decode('utf-8')

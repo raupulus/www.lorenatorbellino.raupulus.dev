@@ -6,7 +6,7 @@ import re
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 PROJECT_DIR = os.path.dirname(BASE_DIR)
 PUBLIC_DIR = os.path.join(PROJECT_DIR, "public")
-DATA_FILE = os.path.join(PROJECT_DIR, "data", "songs.json")
+DATA_FILE = os.path.join(PROJECT_DIR, "songs.json")
 INDEX_FILE = os.path.join(PUBLIC_DIR, "index.html")
 QUIEN_ES_FILE = os.path.join(PUBLIC_DIR, "quien-es-lorena.html")
 
@@ -14,7 +14,16 @@ def build_index():
     with open(DATA_FILE, "r", encoding="utf-8") as f:
         songs = json.load(f)
 
-    songs_json_escaped = json.dumps(songs, ensure_ascii=False)
+    # Export dynamic data files separated from the HTML template (reduces token load and keeps index.html lightweight)
+    songs_js_path = os.path.join(PUBLIC_DIR, "assets", "js", "songs-data.js")
+    os.makedirs(os.path.dirname(songs_js_path), exist_ok=True)
+    with open(songs_js_path, "w", encoding="utf-8") as f_js:
+        f_js.write(f"window.CATALOGO_SONGS = {json.dumps(songs, ensure_ascii=False, indent=2)};\n")
+
+    public_songs_json = os.path.join(PUBLIC_DIR, "songs.json")
+    with open(public_songs_json, "w", encoding="utf-8") as f_json:
+        json.dump(songs, f_json, ensure_ascii=False, indent=2)
+
     total_canciones = len(songs)
     total_discos = len(set(s["album"] for s in songs))
     con_video = sum(1 for s in songs if s["has_video"])
@@ -28,23 +37,30 @@ def build_index():
   <meta name="description" content="Página web oficial de Lorena Torbellino: comedia musical absurda, pop costumbrista y sátira animada en 2D. Explora sus 4 discos y videoclips oficiales.">
   <link rel="canonical" href="https://www.lorenatorbellino.raupulus.dev/">
   
-  <!-- Open Graph / Meta Social -->
+  <!-- Open Graph / Meta Social Adaptado -->
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Lorena Torbellino">
   <meta property="og:url" content="https://www.lorenatorbellino.raupulus.dev/">
   <meta property="og:title" content="Lorena Torbellino — Web Oficial | Canciones y Desastres">
-  <meta property="og:description" content="20 años, voz dulce, zapatillas Converse rojas y un talento sobrenatural para que todo en la vida salga al revés.">
-  <meta property="og:image" content="https://www.lorenatorbellino.raupulus.dev/assets/images/lorena_banner.webp">
+  <meta property="og:description" content="Comedia absurda, pop costumbrista y sátira animada en 2D. 4 discos y 110 canciones de desventuras cotidianas.">
+  <meta property="og:image" content="https://www.lorenatorbellino.raupulus.dev/assets/images/og_home.jpg">
+  <meta property="og:image:secure_url" content="https://www.lorenatorbellino.raupulus.dev/assets/images/og_home.jpg">
+  <meta property="og:image:type" content="image/jpeg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Lorena Torbellino — Web Oficial y Cancionero de 110 Canciones">
   <meta property="og:locale" content="es_ES">
 
   <!-- Twitter Cards -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Lorena Torbellino — Web Oficial">
+  <meta name="twitter:title" content="Lorena Torbellino — Web Oficial | Canciones y Desastres">
   <meta name="twitter:description" content="Comedia musical absurda, pop costumbrista y sátira animada en 2D. 4 discos y 110 canciones.">
-  <meta name="twitter:image" content="https://www.lorenatorbellino.raupulus.dev/assets/images/lorena_banner.webp">
+  <meta name="twitter:image" content="https://www.lorenatorbellino.raupulus.dev/assets/images/og_home.jpg">
+  <meta name="twitter:image:alt" content="Lorena Torbellino — Web Oficial y Cancionero">
   
   <link rel="icon" type="image/png" href="assets/images/favicon.png">
   <link rel="stylesheet" href="assets/css/tailwind.css">
+  <script src="assets/js/songs-data.js"></script>
   <script defer src="assets/js/alpine.min.js"></script>
 
   <!-- Schema.org JSON-LD -->
@@ -832,7 +848,7 @@ def build_index():
         searchQuery: '',
         onlyWithVideo: false,
         activeSong: {{}},
-        songs: {songs_json_escaped},
+        songs: window.CATALOGO_SONGS || [],
 
         init() {{
           // inicialización reactiva
@@ -1038,20 +1054,26 @@ def build_quien_es():
   <meta name="description" content="Conoce la personalidad, señas de identidad y los desastres más cómicos de Lorena Torbellino a través de las poses de sus videoclips oficiales.">
   <link rel="canonical" href="https://www.lorenatorbellino.raupulus.dev/quien-es-lorena.html">
 
-  <!-- Open Graph / Meta Social -->
+  <!-- Open Graph / Meta Social Adaptado -->
   <meta property="og:type" content="article">
   <meta property="og:site_name" content="Lorena Torbellino">
   <meta property="og:url" content="https://www.lorenatorbellino.raupulus.dev/quien-es-lorena.html">
   <meta property="og:title" content="Quién es Lorena Torbellino — Biografía, Poses y Desastres Canónicos">
   <meta property="og:description" content="Conoce la personalidad, señas de identidad y los desastres más cómicos de Lorena Torbellino a través de las poses de sus videoclips oficiales.">
-  <meta property="og:image" content="https://www.lorenatorbellino.raupulus.dev/assets/images/lorena_banner.webp">
+  <meta property="og:image" content="https://www.lorenatorbellino.raupulus.dev/assets/images/og_quien_es.jpg">
+  <meta property="og:image:secure_url" content="https://www.lorenatorbellino.raupulus.dev/assets/images/og_quien_es.jpg">
+  <meta property="og:image:type" content="image/jpeg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Quién es Lorena Torbellino — Biografía, Poses y Desastres Canónicos">
   <meta property="og:locale" content="es_ES">
 
   <!-- Twitter Cards -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Quién es Lorena Torbellino — Biografía y Poses">
   <meta name="twitter:description" content="Conoce la personalidad, señas de identidad y los desastres más cómicos de Lorena Torbellino.">
-  <meta name="twitter:image" content="https://www.lorenatorbellino.raupulus.dev/assets/images/lorena_banner.webp">
+  <meta name="twitter:image" content="https://www.lorenatorbellino.raupulus.dev/assets/images/og_quien_es.jpg">
+  <meta name="twitter:image:alt" content="Quién es Lorena Torbellino — Biografía y Poses">
 
   <link rel="icon" type="image/png" href="assets/images/favicon.png">
   <link rel="stylesheet" href="assets/css/tailwind.css">

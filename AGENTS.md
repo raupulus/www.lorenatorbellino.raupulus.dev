@@ -50,47 +50,55 @@
 www.lorenatorbellino.raupulus.dev/
 ├── AGENTS.md                   # Este documento maestro de reglas
 ├── LICENSE                     # Licencia dual (AGPLv3 para código, privada para música)
+├── songs.json                  # FUENTE ÚNICA DE VERDAD: Base de datos JSON de canciones en la raíz
 ├── tailwind.config.js          # Configuración de Tailwind CSS con paleta oficial
 ├── package.json                # Configuración de compilación Tailwind y scripts npm
 ├── package-lock.json
 ├── .gitignore                  # Exclusiones git (node_modules, logs, etc.)
-├── data/
-│   └── songs.json              # Base de datos JSON de todas las canciones de todos los discos
 ├── scripts/
-│   ├── sync_songs.py           # Sincroniza videoclips a data/songs.json y public/assets/images/covers/
-│   └── build_site.py           # Compila data/songs.json dentro de public/index.html y public/quien-es-lorena.html
+│   ├── sync_songs.py           # Sincroniza videoclips a songs.json y public/assets/images/covers/
+│   ├── build_site.py           # Compila la web, exporta public/songs.json y public/assets/js/songs-data.js
+│   └── generate_og_images.py   # Genera imágenes Open Graph 1200x630 (og_home.jpg y og_quien_es.jpg)
 ├── src/
 │   └── input.css               # CSS de entrada con directivas Tailwind y @layer
 ├── docs/
+│   ├── auditorias/             # Informes de auditoría técnica multidimensional
 │   └── info/
 │       └── DESIGN.md           # Sistema de diseño, paleta y componentes UI
 └── public/                     # ÚNICO DIRECTORIO PUBLICABLE Y EXPUESTO A INTERNET (Apache DocumentRoot)
-    ├── index.html              # Página principal compilada con todo el cancionero
+    ├── index.html              # Página principal compilada (ligera, consume songs-data.js)
     ├── quien-es-lorena.html    # Ficha biográfica y cómica de Lorena
-    ├── robots.txt              # Reglas de bloqueo anti-scraping de IA
+    ├── robots.txt              # Reglas de bloqueo anti-scraping de IA y enlace a sitemap
+    ├── sitemap.xml             # Mapa del sitio XML para indexación en buscadores
+    ├── songs.json              # Copia pública estática de datos para clientes y APIs
     ├── LICENSE                 # Copia pública de términos y licencias
     └── assets/
         ├── css/
         │   └── tailwind.css    # CSS compilado local y minificado listo para producción
         ├── js/
-        │   └── alpine.min.js   # Framework reactivo local (~44KB)
+        │   ├── alpine.min.js   # Framework reactivo local (~44KB)
+        │   └── songs-data.js   # Catálogo dinámico inyectado en window.CATALOGO_SONGS
         └── images/
-            ├── lorena_logo_oficial.png
-            ├── lorena_sticker_guiño.png
-            ├── lorena_avatar.jpg
-            ├── lorena_banner.jpg
-            ├── albums/         # Portadas de discos 1:1 optimizadas
-            ├── traits/         # Poses y gags de características de Lorena
-            └── covers/         # Miniaturas 16:9 oficiales de cada canción
+            ├── favicon.png     # Favicon 64x64px optimizado
+            ├── favicon.webp    # Favicon WebP 64x64px
+            ├── og_home.jpg     # Tarjeta para compartir en redes sociales (1200x630px)
+            ├── og_quien_es.jpg # Tarjeta para compartir biografía en redes (1200x630px)
+            ├── lorena_avatar.webp
+            ├── lorena_banner.webp
+            ├── lorena_sticker_guino.webp
+            ├── albums/         # Portadas de discos 1:1 optimizadas (.webp q=85)
+            ├── traits/         # Poses y gags de características de Lorena (.webp q=85)
+            └── covers/         # Miniaturas 16:9 oficiales de cada canción (.webp q=85)
 ```
+
+> [!CAUTION]
+> **PROHIBICIÓN ESTRICTA DE MEZCLAR ASSETS DE DISTROKID EN EL REPOSITORIO WEB:**
+> Los másteres de 3000×3000px y archivos de distribución para plataformas (DistroKid, Spotify, Apple Music) pertenecen estrictamente al proyecto musical del disco (`avatar/caratulas_albumes_distrokid/`).
+> En este repositorio web **SOLO** se admiten imágenes en formato `.webp` (calidad 85) redimensionadas y optimizadas para su visualización web, además de los assets de fallback para redes sociales (`og_*.jpg`) y favicon (`favicon.png`).
 
 ---
 
-## 4. PATRÓN DE INSERCIÓN Y CATEGORIZACIÓN AL AÑADIR NUEVAS CANCIONES Y DISCOS
-
-> [!IMPORTANT]
-> **PROTOCOLO OBLIGATORIO AL AÑADIR CANCIONES O NUEVOS DISCOS:**
-> A medida que se produzcan nuevas canciones y se agreguen nuevos discos (CD 5 en adelante), se debe seguir rigurosamente este patrón determinista para mantener la web actualizada, coherente y navegable.
+## 4. PATRÓN DE INSERCIÓN, CATEGORIZACIÓN Y ACTUALIZACIÓN DE CONTENIDO
 
 ### 4.1. Taxonomía Oficial de Relatos Temáticos (Filtro de Relatos)
 Cada canción debe asignarse obligatoriamente a una de las **5 categorías de relato cómico**:
@@ -103,7 +111,7 @@ Cada canción debe asignarse obligatoriamente a una de las **5 categorías de re
 | `vida-cotidiana` | **Vida Real & Rutina** | 🛋️ | Pereza legendaria, sofá, procrastinar, rebajas online, perder llaves, madrugar, videojuegos acumulados, día a día. |
 | `campo-animales` | **Animales & Campo** | 🐾 | Animales cómicos, huerta ecológica, topos en el jardín, burrito Porroncio, ponis, ovejas-ratas, mascotas. |
 
-### 4.2. Esquema Normalizado de Canción (`data/songs.json`)
+### 4.2. Esquema Normalizado de Canción (`songs.json` en la Raíz)
 Toda nueva canción añadida debe respetar esta estructura exacta:
 ```json
 {
@@ -123,36 +131,49 @@ Toda nueva canción añadida debe respetar esta estructura exacta:
   "lyrics": "Letra completa de la canción (VACÍO \"\" SI NO TIENE VIDEOCLIP/SUBIDA)",
   "has_video": true,
   "has_custom_cover": true,
-  "cover_image": "assets/images/covers/cdX-nombre-limpio-de-la-cancion.jpg",
+  "cover_image": "assets/images/covers/cdX-nombre-limpio-de-la-cancion.webp",
   "youtube_id": "",
-  "youtube_url": "https://www.youtube.com/results?search_query=... (O https://www.youtube.com/@LorenaTorbellino si has_video es false)"
+  "youtube_url": "https://www.youtube.com/watch?v=... (O https://www.youtube.com/@LorenaTorbellino si has_video es false)"
 }
 ```
 
 > [!IMPORTANT]
 > **REGLA DE SPOILERS Y CANCIONES NO ESTRENADAS (`has_video: false`):**
 > Para las canciones que aún no tienen videoclip oficial subido a YouTube:
-> 1. **CERO SPOILERS DE LETRA:** El campo `"lyrics"` en `data/songs.json` DEBE ser una cadena vacía `""`. El modal web muestra un aviso de próximo estreno (`⚡ Próximamente`) sin desvelar la letra.
+> 1. **CERO SPOILERS DE LETRA:** El campo `"lyrics"` en `songs.json` DEBE ser una cadena vacía `""`. El modal web muestra un aviso de próximo estreno (`⚡ Próximamente`) sin desvelar la letra.
 > 2. **ENLACE A YOUTUBE:** Su `"youtube_url"` debe apuntar al perfil oficial del canal (`https://www.youtube.com/@LorenaTorbellino`), no a búsquedas ni vídeos inexistentes.
 > 3. **BOTÓN DE TARJETA:** En el catálogo muestra `⚡ Próximamente` en lugar de `Ver letra y detalles`.
 
-### 4.3. Flujo Automatizado de Sincronización y Compilación
-Cuando se agreguen canciones o portadas en el directorio de producción de videoclips:
-1. Ejecutar el sincronizador para actualizar `data/songs.json` y copiar miniaturas a `public/assets/images/covers/`:
-   ```bash
-   python3 scripts/sync_songs.py
-   ```
-2. Reconstruir la página estática `public/index.html` y `public/quien-es-lorena.html` con el cancionero actualizado:
+### 4.3. Arquitectura Dinámica y Ahorro de Tokens
+- El archivo `songs.json` ubicado en la raíz del repositorio web es la **única fuente de verdad**.
+- `scripts/build_site.py` extrae dinámicamente este JSON y genera:
+  1. `public/assets/js/songs-data.js` (`window.CATALOGO_SONGS = [...]`).
+  2. `public/songs.json` (copia estática pura).
+- La plantilla `public/index.html` incluye `<script src="assets/js/songs-data.js"></script>` y Alpine.js inicializa `songs: window.CATALOGO_SONGS || []`.
+- **Beneficio crítico:** `public/index.html` es ligero (~50 KB en vez de ~170 KB) y no sufre diffs masivos de 110 canciones cada vez que se actualiza una letra o enlace, ahorrando drásticamente tokens en sesiones de desarrollo con IA.
+
+### 4.4. PROTOCOLO OBLIGATORIO AL ACTUALIZAR EL ESTADO DEL CONTENIDO
+Cuando se complete un videoclip, se estrene una canción en YouTube o se agreguen nuevos temas/álbumes:
+1. **Actualizar el archivo raíz `songs.json`:**
+   - Cambiar `"has_video": true`.
+   - Asignar la URL final en `"youtube_url"` (ej. `https://www.youtube.com/watch?v=...`).
+   - Añadir la letra completa oficial en `"lyrics"` (con doble salto de línea entre estrofas).
+2. **Reconstruir la web estática y exportar los datos:**
    ```bash
    python3 scripts/build_site.py
    ```
-3. Si se han incorporado nuevas clases de utilidad o identificadores de color de Tailwind, recompilar el CSS:
+   *(Este comando actualiza automáticamente las estadísticas del Hero, el mapa `public/sitemap.xml`, genera `public/songs.json` y `public/assets/js/songs-data.js`).*
+3. **Recompilar CSS si hay nuevas clases:**
    ```bash
    npm run build:css
    ```
-4. Confirmar los cambios con un commit descriptivo en Git:
+4. **Regenerar tarjetas de redes sociales si se modifican titulares o identidad:**
    ```bash
-   git add data/ public/ && git commit -m "feat(catalog): sincronizar nuevas canciones y portadas"
+   python3 scripts/generate_og_images.py
+   ```
+5. **Confirmar cambios en Git:**
+   ```bash
+   git add songs.json public/ && git commit -m "feat(catalog): estrenar videoclip de <Canción> y publicar letra"
    ```
 
 ---
