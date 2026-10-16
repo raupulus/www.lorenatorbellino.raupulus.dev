@@ -48,32 +48,40 @@
 ### Estructura de Directorios del Repositorio:
 ```text
 www.lorenatorbellino.raupulus.dev/
-├── index.html                  # Página principal de la web compilada con todo el cancionero
-├── tailwind.config.js          # Configuración de Tailwind CSS con paleta oficial
-├── package.json                # Configuración de compilación Tailwind
-├── .gitignore                  # Exclusiones git (node_modules, logs, etc.)
 ├── AGENTS.md                   # Este documento maestro de reglas
+├── LICENSE                     # Licencia dual (AGPLv3 para código, privada para música)
+├── tailwind.config.js          # Configuración de Tailwind CSS con paleta oficial
+├── package.json                # Configuración de compilación Tailwind y scripts npm
+├── package-lock.json
+├── .gitignore                  # Exclusiones git (node_modules, logs, etc.)
 ├── data/
 │   └── songs.json              # Base de datos JSON de todas las canciones de todos los discos
 ├── scripts/
-│   ├── sync_songs.py           # Sincroniza videoclips desde el almacenamiento a data/songs.json
-│   └── build_site.py           # Compila data/songs.json dentro de index.html
+│   ├── sync_songs.py           # Sincroniza videoclips a data/songs.json y public/assets/images/covers/
+│   └── build_site.py           # Compila data/songs.json dentro de public/index.html y public/quien-es-lorena.html
 ├── src/
 │   └── input.css               # CSS de entrada con directivas Tailwind y @layer
-├── assets/
-│   ├── css/
-│   │   └── tailwind.css        # CSS compilado local y minificado listo para producción
-│   ├── js/
-│   │   └── alpine.min.js       # Framework reactivo local (~44KB)
-│   └── images/
-│       ├── lorena_logo_oficial.png
-│       ├── lorena_sticker_guiño.png
-│       ├── lorena_avatar.jpg
-│       ├── lorena_banner.jpg
-│       └── covers/             # Miniaturas 16:9 oficiales de cada canción
-└── docs/
-    └── info/
-        └── DESIGN.md           # Sistema de diseño, paleta y componentes UI
+├── docs/
+│   └── info/
+│       └── DESIGN.md           # Sistema de diseño, paleta y componentes UI
+└── public/                     # ÚNICO DIRECTORIO PUBLICABLE Y EXPUESTO A INTERNET (Apache DocumentRoot)
+    ├── index.html              # Página principal compilada con todo el cancionero
+    ├── quien-es-lorena.html    # Ficha biográfica y cómica de Lorena
+    ├── robots.txt              # Reglas de bloqueo anti-scraping de IA
+    ├── LICENSE                 # Copia pública de términos y licencias
+    └── assets/
+        ├── css/
+        │   └── tailwind.css    # CSS compilado local y minificado listo para producción
+        ├── js/
+        │   └── alpine.min.js   # Framework reactivo local (~44KB)
+        └── images/
+            ├── lorena_logo_oficial.png
+            ├── lorena_sticker_guiño.png
+            ├── lorena_avatar.jpg
+            ├── lorena_banner.jpg
+            ├── albums/         # Portadas de discos 1:1 optimizadas
+            ├── traits/         # Poses y gags de características de Lorena
+            └── covers/         # Miniaturas 16:9 oficiales de cada canción
 ```
 
 ---
@@ -117,27 +125,27 @@ Toda nueva canción añadida debe respetar esta estructura exacta:
   "has_custom_cover": true,
   "cover_image": "assets/images/covers/cdX-nombre-limpio-de-la-cancion.jpg",
   "youtube_id": "",
-  "youtube_url": "https://www.youtube.com/@LorenaTorbellino"
+  "youtube_url": "https://www.youtube.com/results?search_query=..."
 }
 ```
 
 ### 4.3. Flujo Automatizado de Sincronización y Compilación
 Cuando se agreguen canciones o portadas en el directorio de producción de videoclips:
-1. Ejecutar el sincronizador para actualizar `data/songs.json` y copiar miniaturas a `assets/images/covers/`:
+1. Ejecutar el sincronizador para actualizar `data/songs.json` y copiar miniaturas a `public/assets/images/covers/`:
    ```bash
    python3 scripts/sync_songs.py
    ```
-2. Reconstruir la página estática [index.html](index.html) con el cancionero actualizado:
+2. Reconstruir la página estática [public/index.html](public/index.html) y [public/quien-es-lorena.html](public/quien-es-lorena.html) con el cancionero actualizado:
    ```bash
    python3 scripts/build_site.py
    ```
 3. Si se han incorporado nuevas clases de utilidad o identificadores de color de Tailwind, recompilar el CSS:
    ```bash
-   npx tailwindcss -i ./src/input.css -o ./assets/css/tailwind.css --minify
+   npm run build:css
    ```
 4. Confirmar los cambios con un commit descriptivo en Git:
    ```bash
-   git add data/ assets/ index.html && git commit -m "feat(catalog): sincronizar nuevas canciones y portadas"
+   git add data/ public/ && git commit -m "feat(catalog): sincronizar nuevas canciones y portadas"
    ```
 
 ---

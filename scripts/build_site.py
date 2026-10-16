@@ -5,9 +5,10 @@ import re
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 PROJECT_DIR = os.path.dirname(BASE_DIR)
+PUBLIC_DIR = os.path.join(PROJECT_DIR, "public")
 DATA_FILE = os.path.join(PROJECT_DIR, "data", "songs.json")
-INDEX_FILE = os.path.join(PROJECT_DIR, "index.html")
-QUIEN_ES_FILE = os.path.join(PROJECT_DIR, "quien-es-lorena.html")
+INDEX_FILE = os.path.join(PUBLIC_DIR, "index.html")
+QUIEN_ES_FILE = os.path.join(PUBLIC_DIR, "quien-es-lorena.html")
 
 def build_index():
     with open(DATA_FILE, "r", encoding="utf-8") as f:

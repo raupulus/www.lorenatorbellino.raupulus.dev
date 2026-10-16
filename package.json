@@ -1,4 +1,8 @@
 {
+  "scripts": {
+    "build:css": "tailwindcss -i ./src/input.css -o ./public/assets/css/tailwind.css --minify",
+    "build": "python3 scripts/build_site.py && npm run build:css"
+  },
   "devDependencies": {
     "tailwindcss": "^3.4.17"
   }

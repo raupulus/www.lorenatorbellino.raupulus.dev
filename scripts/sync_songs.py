@@ -9,7 +9,7 @@ import urllib.parse
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 PROJECT_DIR = os.path.dirname(BASE_DIR)
 VIDEOCLIPS_DIR = "/Volumes/WAREHOUSE/pCloudDrive/Projects/4 - Discos/Lorena/videoclips"
-COVERS_DEST = os.path.join(PROJECT_DIR, "assets", "images", "covers")
+COVERS_DEST = os.path.join(PROJECT_DIR, "public", "assets", "images", "covers")
 DATA_FILE = os.path.join(PROJECT_DIR, "data", "songs.json")
 
 os.makedirs(COVERS_DEST, exist_ok=True)
