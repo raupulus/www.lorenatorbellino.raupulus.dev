@@ -77,7 +77,6 @@ def build_index():
           <span>✨</span>
           <span>Quién es Lorena</span>
         </a>
-        <a href="#contacto" class="hover:text-torbellino-coral transition">Contacto</a>
       </nav>
 
       <!-- Desktop Action CTA -->
@@ -105,7 +104,6 @@ def build_index():
       <a @click="mobileMenuOpen = false" href="#discos" class="block py-2 text-[#4A3842] hover:text-torbellino-coral">Discos Oficiales</a>
       <a @click="mobileMenuOpen = false" href="#catalogo" class="block py-2 text-[#4A3842] hover:text-torbellino-coral">Cancionero y Filtros</a>
       <a href="quien-es-lorena.html" class="block py-2 text-torbellino-coral font-black">✨ Quién es Lorena (Biografía y Gags)</a>
-      <a @click="mobileMenuOpen = false" href="#contacto" class="block py-2 text-[#4A3842] hover:text-torbellino-coral">Contacto</a>
       <div class="pt-2">
         <a href="https://www.youtube.com/@LorenaTorbellino?sub_confirmation=1" target="_blank" rel="noopener noreferrer" 
            class="flex items-center justify-center gap-2 w-full bg-gradient-to-r from-torbellino-coral to-torbellino-red text-white py-3 rounded-2xl font-black shadow-md">
@@ -666,7 +664,7 @@ def build_index():
   </section>
 
   <!-- Footer -->
-  <footer id="contacto" class="bg-torbellino-dark text-white pt-16 pb-12 border-t-4 border-torbellino-coral">
+  <footer class="bg-torbellino-dark text-white pt-16 pb-12 border-t-4 border-torbellino-coral">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       
       <div class="grid grid-cols-1 md:grid-cols-4 gap-10 pb-12 border-b border-white/10">
@@ -677,11 +675,17 @@ def build_index():
             <span class="text-2xl font-black tracking-tight text-white">Lorena Torbellino</span>
           </div>
           <p class="text-xs text-white/70 max-w-md leading-relaxed">
-            Proyecto musical de comedia y sátira animada en 2D. Todas las situaciones y personajes son creaciones humorísticas de ficción para alegrar la rutina cotidiana.
+            Proyecto musical de comedia absurda, pop costumbrista y sátira animada en 2D.
           </p>
-          <div class="pt-2">
-            <span class="text-xs text-white/50">Contacto profesional y licencias:</span>
-            <div class="text-sm font-semibold text-torbellino-peach">public@raupulus.dev</div>
+          <div class="pt-2 space-y-1">
+            <div class="text-xs text-white/70">
+              Desarrollo y autoría web: 
+              <a href="https://raupulus.dev" target="_blank" rel="noopener noreferrer" class="text-torbellino-peach font-bold hover:underline">raupulus.dev</a>
+            </div>
+            <div class="text-xs text-white/70">
+              Contacto profesional y licencias: 
+              <a href="mailto:public@raupulus.dev" class="text-torbellino-peach font-semibold hover:underline">public@raupulus.dev</a>
+            </div>
           </div>
         </div>
 
@@ -714,10 +718,10 @@ def build_index():
       <!-- Copyright -->
       <div class="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-white/50 gap-4">
         <div>
-          ℗ & © 2026 Lorena Torbellino. Todos los derechos reservados.
+          Web oficial por <a href="https://raupulus.dev" target="_blank" rel="noopener noreferrer" class="text-white/80 hover:text-torbellino-peach font-bold underline">raupulus.dev</a> (<a href="mailto:public@raupulus.dev" class="text-white/80 hover:text-torbellino-peach">public@raupulus.dev</a>). Música y canciones bajo propiedad privada de Lorena Torbellino.
         </div>
         <div>
-          Desplegado 100% estático sin recursos externos.
+          <a href="LICENSE" class="hover:text-white transition underline">Licencia AGPLv3</a>
         </div>
       </div>
 
@@ -901,31 +905,33 @@ def build_quien_es():
     cards_html = ""
     for t in traits_data:
         cards_html += f'''
-        <article class="bg-white rounded-3xl overflow-hidden border-2 border-torbellino-sand hover:border-torbellino-coral/60 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between group">
+        <article class="bg-white rounded-[2rem] overflow-hidden border border-torbellino-sand hover:border-torbellino-coral/60 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between group">
           <div>
-            <div class="relative aspect-video overflow-hidden bg-torbellino-sand/40">
-              <img src="{t['image']}" alt="{t['title']}" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" loading="lazy">
-              <div class="absolute top-3 left-3">
-                <span class="px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider shadow-sm {t['tag_color']}">
+            <div class="relative aspect-video overflow-hidden bg-torbellino-sand/30">
+              <img src="{t['image']}" alt="{t['title']}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" loading="lazy">
+              <div class="absolute top-4 left-4 z-10">
+                <span class="px-3.5 py-1.5 rounded-full text-[11px] font-black uppercase tracking-wider shadow-md backdrop-blur-sm {t['tag_color']}">
                   {t['tag']}
                 </span>
               </div>
             </div>
-            <div class="p-6">
-              <div class="text-[11px] font-bold text-torbellino-denim mb-1">
+            <div class="p-8 space-y-3">
+              <div class="text-xs font-bold text-torbellino-denim tracking-wide">
                 Gag oficial · {t['song_ref']}
               </div>
-              <h3 class="text-lg font-black text-torbellino-plum group-hover:text-torbellino-coral transition leading-snug">
+              <h3 class="text-xl font-black text-torbellino-plum group-hover:text-torbellino-coral transition leading-snug">
                 {t['title']}
               </h3>
-              <p class="text-xs sm:text-sm text-[#5C4550] mt-2.5 leading-relaxed">
+              <p class="text-sm text-[#5C4550] leading-relaxed pt-1">
                 {t['description']}
               </p>
             </div>
           </div>
-          <div class="px-6 pb-6 pt-1 flex items-center justify-between border-t border-torbellino-sand/60">
-            <span class="text-[11px] font-bold text-torbellino-wine">Perfil Canónico</span>
-            <span class="text-xs font-black text-torbellino-coral group-hover:translate-x-1 transition">👟 Lorena Torbellino</span>
+          <div class="px-8 pb-7 pt-4 flex items-center justify-between border-t border-torbellino-sand/60 bg-gray-50/50">
+            <span class="text-xs font-bold text-torbellino-wine">Perfil Canónico</span>
+            <span class="text-xs font-black text-torbellino-coral group-hover:translate-x-1 transition flex items-center gap-1">
+              <span>👟 Lorena Torbellino</span>
+            </span>
           </div>
         </article>
         '''
@@ -944,7 +950,7 @@ def build_quien_es():
 <body class="min-h-screen bg-torbellino-cream font-sans antialiased text-[#291C22]" x-data="{{ mobileMenuOpen: false }}">
 
   <!-- Top Announcement Bar -->
-  <aside aria-label="Aviso destacado" class="bg-gradient-to-r from-torbellino-coral via-torbellino-peach to-torbellino-coral text-torbellino-plum text-xs md:text-sm font-bold py-2 px-4 text-center shadow-inner flex items-center justify-center gap-2">
+  <aside aria-label="Aviso destacado" class="bg-gradient-to-r from-torbellino-coral via-torbellino-peach to-torbellino-coral text-torbellino-plum text-xs md:text-sm font-bold py-2.5 px-4 text-center shadow-inner flex items-center justify-center gap-2">
     <span>👟</span>
     <span>Perfil Oficial y Rasgos de Lorena Torbellino</span>
     <a href="index.html#catalogo" class="underline hover:text-torbellino-wine transition ml-1 inline-flex items-center gap-1">
@@ -970,17 +976,16 @@ def build_quien_es():
         </div>
       </a>
 
-      <nav class="hidden md:flex items-center gap-7 font-bold text-sm text-[#4A3842]">
+      <nav class="hidden md:flex items-center gap-8 font-bold text-sm text-[#4A3842]">
         <a href="index.html" class="hover:text-torbellino-coral transition">Inicio</a>
         <a href="index.html#discos" class="hover:text-torbellino-coral transition">Discos</a>
         <a href="index.html#catalogo" class="hover:text-torbellino-coral transition">Cancionero</a>
-        <a href="quien-es-lorena.html" class="text-torbellino-coral font-black border-b-2 border-torbellino-coral pb-0.5">Quién es Lorena</a>
-        <a href="index.html#contacto" class="hover:text-torbellino-coral transition">Contacto</a>
+        <a href="quien-es-lorena.html" class="text-torbellino-coral font-black border-b-2 border-torbellino-coral pb-1">Quién es Lorena</a>
       </nav>
 
       <div class="hidden md:flex items-center gap-4">
         <a href="https://www.youtube.com/@LorenaTorbellino?sub_confirmation=1" target="_blank" rel="noopener noreferrer" 
-           class="inline-flex items-center gap-2 bg-gradient-to-r from-torbellino-coral to-torbellino-red text-white font-extrabold text-sm px-5 py-2.5 rounded-full shadow-md shadow-red-500/20 hover:scale-105 transition duration-200">
+           class="inline-flex items-center gap-2 bg-gradient-to-r from-torbellino-coral to-torbellino-red text-white font-extrabold text-sm px-6 py-2.5 rounded-full shadow-md shadow-red-500/20 hover:scale-105 transition duration-200">
           <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
           <span>Suscribirme al Canal</span>
         </a>
@@ -996,68 +1001,67 @@ def build_quien_es():
     </div>
 
     <!-- Mobile Dropdown -->
-    <div x-show="mobileMenuOpen" x-cloak @click.away="mobileMenuOpen = false" class="md:hidden border-b border-torbellino-sand bg-white px-5 pt-3 pb-6 space-y-3 font-bold text-sm shadow-xl">
+    <div x-show="mobileMenuOpen" x-cloak @click.away="mobileMenuOpen = false" class="md:hidden border-b border-torbellino-sand bg-white px-6 pt-4 pb-6 space-y-3 font-bold text-sm shadow-xl">
       <a href="index.html" class="block py-2 text-[#4A3842]">Inicio</a>
       <a href="index.html#discos" class="block py-2 text-[#4A3842]">Discos</a>
       <a href="index.html#catalogo" class="block py-2 text-[#4A3842]">Cancionero</a>
-      <a href="quien-es-lorena.html" class="block py-2 text-torbellino-coral font-black">Quién es Lorena</a>
-      <a href="index.html#contacto" class="block py-2 text-[#4A3842]">Contacto</a>
+      <a href="quien-es-lorena.html" class="block py-2 text-torbellino-coral font-black">✨ Quién es Lorena</a>
     </div>
   </header>
 
   <!-- Hero: Perfil de Lorena -->
-  <section class="py-12 md:py-18 bg-white border-b border-torbellino-sand relative overflow-hidden">
+  <section class="py-16 md:py-24 bg-white border-b border-torbellino-sand relative overflow-hidden">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
         
         <div class="lg:col-span-5 flex justify-center">
           <div class="relative w-full max-w-sm">
-            <div class="bg-gradient-to-tr from-torbellino-peach/50 to-torbellino-lilac/30 rounded-3xl p-6 border-4 border-white shadow-2xl">
-              <img src="assets/images/lorena_sticker_guiño.png" alt="Lorena Torbellino" class="w-full h-auto drop-shadow-lg">
+            <div class="bg-gradient-to-tr from-torbellino-peach/40 via-white to-torbellino-lilac/30 rounded-3xl p-8 border-2 border-torbellino-sand shadow-xl">
+              <img src="assets/images/lorena_sticker_guiño.png" alt="Lorena Torbellino" class="w-full h-auto drop-shadow-md">
             </div>
           </div>
         </div>
 
-        <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+        <div class="lg:col-span-7 space-y-8 text-center lg:text-left">
           
           <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-torbellino-cream border border-torbellino-sand text-xs font-black text-torbellino-wine">
             <span>✨</span>
             <span>La Ficha de Personaje Oficial</span>
           </div>
 
-          <h1 class="text-4xl sm:text-5xl font-black text-torbellino-plum tracking-tight leading-tight">
+          <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black text-torbellino-plum tracking-tight leading-[1.15]">
             Quién es Lorena:
-            <span class="block bg-gradient-to-r from-torbellino-coral to-torbellino-wine bg-clip-text text-transparent">
+            <span class="block bg-gradient-to-r from-torbellino-coral to-torbellino-wine bg-clip-text text-transparent pt-1">
               Carisma, Dulzura y Desastre
             </span>
           </h1>
 
-          <p class="text-sm sm:text-base text-[#5C4550] leading-relaxed">
-            Lorena Torbellino es una joven española de 20 años emancipada, alegre, descarada y con una voz dulce como la miel. Su rasgo más característico es su don sobrenatural para que las cosas más rutinarias se conviertan en una comedia de enredos de proporciones bíblicas.
+          <p class="text-base sm:text-lg text-[#5C4550] leading-relaxed max-w-2xl mx-auto lg:mx-0">
+            Lorena Torbellino es una joven española de 20 años emancipada, alegre, descarada y con una voz dulce como la miel. Su rasgo más característico es su don sobrenatural para que las cosas más cotidianas se conviertan en una comedia de enredos de proporciones bíblicas.
           </p>
 
-          <!-- Badges de Atributos Fijos -->
-          <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-2">
-            <div class="bg-torbellino-cream p-3.5 rounded-2xl border border-torbellino-sand text-center">
-              <div class="text-2xl mb-1">👟</div>
-              <div class="text-xs font-black text-torbellino-plum">Converse Rojas</div>
-              <div class="text-[10px] text-[#735A66]">Bajas y gastadas</div>
+          <!-- Badges de Atributos Fijos (Espaciados y Cómodos) -->
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-2">
+            <div class="bg-torbellino-cream p-5 rounded-2xl border border-torbellino-sand text-center space-y-1 shadow-sm">
+              <div class="text-3xl mb-1">👟</div>
+              <div class="text-sm font-black text-torbellino-plum">Converse Rojas</div>
+              <div class="text-xs text-[#735A66]">Bajas y gastadas</div>
             </div>
-            <div class="bg-torbellino-cream p-3.5 rounded-2xl border border-torbellino-sand text-center">
-              <div class="text-2xl mb-1">🎀</div>
-              <div class="text-xs font-black text-torbellino-plum">Pinza Negra</div>
-              <div class="text-[10px] text-[#735A66]">Moño alto despeinado</div>
+            <div class="bg-torbellino-cream p-5 rounded-2xl border border-torbellino-sand text-center space-y-1 shadow-sm">
+              <div class="text-3xl mb-1">🎀</div>
+              <div class="text-sm font-black text-torbellino-plum">Pinza Negra</div>
+              <div class="text-xs text-[#735A66]">Moño alto despeinado</div>
             </div>
-            <div class="bg-torbellino-cream p-3.5 rounded-2xl border border-torbellino-sand text-center">
-              <div class="text-2xl mb-1">✨</div>
-              <div class="text-xs font-black text-torbellino-plum">Pecas Cálidas</div>
-              <div class="text-[10px] text-[#735A66]">En nariz y mejillas</div>
+            <div class="bg-torbellino-cream p-5 rounded-2xl border border-torbellino-sand text-center space-y-1 shadow-sm">
+              <div class="text-3xl mb-1">✨</div>
+              <div class="text-sm font-black text-torbellino-plum">Pecas Cálidas</div>
+              <div class="text-xs text-[#735A66]">En nariz y mejillas</div>
             </div>
-            <div class="bg-torbellino-cream p-3.5 rounded-2xl border border-torbellino-sand text-center">
-              <div class="text-2xl mb-1">🎙️</div>
-              <div class="text-xs font-black text-torbellino-plum">Voz Dulce</div>
-              <div class="text-[10px] text-[#735A66]">Cero pudor cómico</div>
+            <div class="bg-torbellino-cream p-5 rounded-2xl border border-torbellino-sand text-center space-y-1 shadow-sm">
+              <div class="text-3xl mb-1">🎙️</div>
+              <div class="text-sm font-black text-torbellino-plum">Voz Dulce</div>
+              <div class="text-xs text-[#735A66]">Cero pudor cómico</div>
             </div>
           </div>
 
@@ -1069,19 +1073,19 @@ def build_quien_es():
   </section>
 
   <!-- Poses & Gags Gallery -->
-  <section class="py-16 md:py-24">
+  <section class="py-20 md:py-28">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       
-      <div class="text-center max-w-2xl mx-auto mb-14 space-y-3">
-        <span class="text-xs font-extrabold uppercase tracking-widest text-torbellino-coral">Galería de Desventuras</span>
-        <h2 class="text-3xl sm:text-4xl font-black text-torbellino-plum">Cosas que le Han Pasado a Lorena</h2>
-        <p class="text-sm text-[#6E5562]">
-          Un recorrido visual por las poses y gags de sus videoclips oficiales que definen su personalidad arrolladora y divertida.
+      <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
+        <span class="text-xs font-extrabold uppercase tracking-widest text-torbellino-coral bg-torbellino-coral/10 px-4 py-1.5 rounded-full">Galería de Desventuras</span>
+        <h2 class="text-3xl sm:text-4xl md:text-5xl font-black text-torbellino-plum tracking-tight">Cosas que le Han Pasado a Lorena</h2>
+        <p class="text-base text-[#6E5562] max-w-2xl mx-auto leading-relaxed">
+          Un recorrido visual por las poses y gags de sus videoclips oficiales que definen su personalidad arrolladora, tierna y divertida.
         </p>
       </div>
 
-      <!-- Traits Grid -->
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <!-- Traits Grid con espaciado amplio -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
         {cards_html}
       </div>
 
@@ -1089,17 +1093,17 @@ def build_quien_es():
   </section>
 
   <!-- Back to Music CTA -->
-  <section class="py-16 bg-white border-t border-torbellino-sand text-center">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4">
-      <span class="text-4xl">🎵</span>
-      <h2 class="text-2xl sm:text-3xl font-black text-torbellino-plum">
+  <section class="py-20 bg-white border-t border-torbellino-sand text-center">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
+      <span class="text-5xl">🎵</span>
+      <h2 class="text-3xl sm:text-4xl font-black text-torbellino-plum">
         ¡Escucha todas estas historias cantadas con ritmo!
       </h2>
-      <p class="text-sm text-[#6B5660] max-w-xl mx-auto">
-        Explora los 4 álbumes y las 110 canciones completas en el cancionero oficial interactivo.
+      <p class="text-base text-[#6B5660] max-w-xl mx-auto leading-relaxed">
+        Explora los 4 álbumes y las 110 canciones completas en el cancionero interactivo con letras y búsqueda directa.
       </p>
-      <div class="pt-2 flex justify-center gap-4">
-        <a href="index.html#catalogo" class="bg-gradient-to-r from-torbellino-coral to-torbellino-wine text-white font-extrabold px-8 py-3.5 rounded-full shadow-lg shadow-torbellino-coral/25 hover:scale-105 transition">
+      <div class="pt-2 flex justify-center">
+        <a href="index.html#catalogo" class="bg-gradient-to-r from-torbellino-coral to-torbellino-wine text-white font-extrabold px-9 py-4 rounded-full shadow-lg shadow-torbellino-coral/25 hover:scale-105 transition text-base">
           Ver las 110 Canciones Oficiales →
         </a>
       </div>
@@ -1107,16 +1111,59 @@ def build_quien_es():
   </section>
 
   <!-- Footer -->
-  <footer class="bg-torbellino-dark text-white pt-14 pb-12 border-t-4 border-torbellino-coral">
+  <footer class="bg-torbellino-dark text-white pt-16 pb-12 border-t-4 border-torbellino-coral">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex flex-col sm:flex-row items-center justify-between text-xs text-white/60 gap-4">
-        <div>
-          ℗ & © 2026 Lorena Torbellino · Contacto: <span class="text-torbellino-peach font-semibold">public@raupulus.dev</span>
+      
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-10 pb-12 border-b border-white/10">
+        <div class="md:col-span-2 space-y-4">
+          <span class="text-2xl font-black tracking-tight text-white">Lorena Torbellino</span>
+          <p class="text-xs text-white/70 max-w-md leading-relaxed">
+            Proyecto musical de comedia absurda, pop costumbrista y sátira animada en 2D.
+          </p>
+          <div class="pt-2 space-y-1">
+            <div class="text-xs text-white/70">
+              Desarrollo y autoría web: 
+              <a href="https://raupulus.dev" target="_blank" rel="noopener noreferrer" class="text-torbellino-peach font-bold hover:underline">raupulus.dev</a>
+            </div>
+            <div class="text-xs text-white/70">
+              Contacto profesional y licencias: 
+              <a href="mailto:public@raupulus.dev" class="text-torbellino-peach font-semibold hover:underline">public@raupulus.dev</a>
+            </div>
+          </div>
         </div>
+
         <div>
-          <a href="index.html" class="text-white hover:text-torbellino-coral transition">Volver a la portada principal</a>
+          <h4 class="text-xs font-bold uppercase tracking-wider text-torbellino-peach mb-4">Secciones</h4>
+          <ul class="space-y-2 text-xs text-white/80">
+            <li><a href="index.html#inicio" class="hover:text-torbellino-coral transition">Inicio</a></li>
+            <li><a href="index.html#discos" class="hover:text-torbellino-coral transition">Catálogo de Discos</a></li>
+            <li><a href="index.html#catalogo" class="hover:text-torbellino-coral transition">Cancionero Oficial</a></li>
+            <li><a href="quien-es-lorena.html" class="hover:text-torbellino-coral transition">Quién es Lorena (Gags & Poses)</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="text-xs font-bold uppercase tracking-wider text-torbellino-peach mb-4">Canal Oficial</h4>
+          <p class="text-xs text-white/70 mb-4">
+            Disfruta de las animaciones y canciones completas en YouTube:
+          </p>
+          <a href="https://www.youtube.com/@LorenaTorbellino?sub_confirmation=1" target="_blank" rel="noopener noreferrer" 
+             class="inline-flex items-center gap-2 bg-torbellino-coral hover:bg-torbellino-red text-white text-xs font-black px-4 py-2.5 rounded-full transition shadow-md">
+            <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            <span>@LorenaTorbellino</span>
+          </a>
         </div>
       </div>
+
+      <div class="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-white/50 gap-4">
+        <div>
+          Web oficial por <a href="https://raupulus.dev" target="_blank" rel="noopener noreferrer" class="text-white/80 hover:text-torbellino-peach font-bold underline">raupulus.dev</a> (<a href="mailto:public@raupulus.dev" class="text-white/80 hover:text-torbellino-peach">public@raupulus.dev</a>). Música bajo propiedad privada de Lorena Torbellino.
+        </div>
+        <div>
+          <a href="LICENSE" class="hover:text-white transition underline">Licencia AGPLv3</a>
+        </div>
+      </div>
+
     </div>
   </footer>
 

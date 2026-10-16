@@ -4,6 +4,7 @@ import json
 import unicodedata
 import re
 import shutil
+import urllib.parse
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 PROJECT_DIR = os.path.dirname(BASE_DIR)
@@ -112,6 +113,10 @@ for album_name, alb_meta in albums_info.items():
         }
         default_cover = album_cover_map.get(alb_meta['id'], 'assets/images/lorena_avatar.jpg')
 
+        # Enlace directo al videoclip específico o búsqueda directa del vídeo en YouTube
+        yt_search_query = urllib.parse.quote_plus(f"{clean_title} Lorena Torbellino")
+        direct_yt_url = f"https://www.youtube.com/results?search_query={yt_search_query}"
+
         song_entry = {
             "id": global_id,
             "track_number": track_num,
@@ -131,7 +136,7 @@ for album_name, alb_meta in albums_info.items():
             "has_custom_cover": has_custom_cover,
             "cover_image": f"assets/images/covers/{cover_filename}" if has_custom_cover else default_cover,
             "youtube_id": "",
-            "youtube_url": "https://www.youtube.com/@LorenaTorbellino"
+            "youtube_url": direct_yt_url
         }
         all_songs.append(song_entry)
         global_id += 1
