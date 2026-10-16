@@ -210,7 +210,7 @@
             
             <!-- Real Album Cover -->
             <div class="aspect-square rounded-2xl overflow-hidden shadow-md mb-4 border border-torbellino-sand/80 group-hover:scale-105 transition duration-300 relative">
-              <img src="assets/images/albums/cd1_cosas_de_la_vida_real_web.jpg" alt="Carátula oficial CD 1 - Cosas de la vida real" class="w-full h-full object-cover">
+              <img src="assets/images/albums/cd1_cosas_de_la_vida_real_web.webp" alt="Carátula oficial CD 1 - Cosas de la vida real" class="w-full h-full object-cover">
               <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition flex items-end p-3">
                 <span class="text-[11px] font-black text-white bg-torbellino-coral px-2.5 py-1 rounded-full">Ver 21 temas</span>
               </div>
@@ -241,7 +241,7 @@
             
             <!-- Real Album Cover -->
             <div class="aspect-square rounded-2xl overflow-hidden shadow-md mb-4 border border-torbellino-sand/80 group-hover:scale-105 transition duration-300 relative">
-              <img src="assets/images/albums/cd2_me_pasa_de_todo_web.jpg" alt="Carátula oficial CD 2 - Me pasa de todo" class="w-full h-full object-cover">
+              <img src="assets/images/albums/cd2_me_pasa_de_todo_web.webp" alt="Carátula oficial CD 2 - Me pasa de todo" class="w-full h-full object-cover">
               <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition flex items-end p-3">
                 <span class="text-[11px] font-black text-white bg-torbellino-denim px-2.5 py-1 rounded-full">Ver 33 temas</span>
               </div>
@@ -272,7 +272,7 @@
             
             <!-- Real Album Cover -->
             <div class="aspect-square rounded-2xl overflow-hidden shadow-md mb-4 border border-torbellino-sand/80 group-hover:scale-105 transition duration-300 relative">
-              <img src="assets/images/albums/cd3_que_locura_web.jpg" alt="Carátula oficial CD 3 - Que locura" class="w-full h-full object-cover">
+              <img src="assets/images/albums/cd3_que_locura_web.webp" alt="Carátula oficial CD 3 - Que locura" class="w-full h-full object-cover">
               <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition flex items-end p-3">
                 <span class="text-[11px] font-black text-white bg-torbellino-wine px-2.5 py-1 rounded-full">Ver 32 temas</span>
               </div>
@@ -303,7 +303,7 @@
             
             <!-- Real Album Cover -->
             <div class="aspect-square rounded-2xl overflow-hidden shadow-md mb-4 border border-torbellino-sand/80 group-hover:scale-105 transition duration-300 relative">
-              <img src="assets/images/albums/cd4_problemas_de_viejoven_web.jpg" alt="Carátula oficial CD 4 - Problemas de viejoven" class="w-full h-full object-cover">
+              <img src="assets/images/albums/cd4_problemas_de_viejoven_web.webp" alt="Carátula oficial CD 4 - Problemas de viejoven" class="w-full h-full object-cover">
               <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition flex items-end p-3">
                 <span class="text-[11px] font-black text-white bg-torbellino-plum px-2.5 py-1 rounded-full">Ver 24 temas</span>
               </div>
@@ -597,9 +597,11 @@
       </div>
 
       <!-- Modal Footer -->
-      <div class="p-4 bg-torbellino-cream border-t border-torbellino-sand flex items-center justify-between">
-        <span class="text-[11px] font-bold text-[#735A66]">Lorena Torbellino · ℗ & © 2026</span>
-        <button @click="modalOpen = false" class="px-5 py-2 rounded-full bg-white border border-torbellino-sand text-xs font-black text-torbellino-plum hover:bg-torbellino-sand transition">
+      <div class="p-4 bg-torbellino-cream border-t border-torbellino-sand flex flex-col sm:flex-row items-center justify-between gap-3 text-center sm:text-left">
+        <span class="text-[11px] font-semibold text-[#735A66]">
+          Web oficial por <a href="https://raupulus.dev" target="_blank" rel="noopener noreferrer" class="text-torbellino-coral font-bold hover:underline">raupulus.dev</a> (<a href="mailto:public@raupulus.dev" class="text-torbellino-coral hover:underline">public@raupulus.dev</a>). Música bajo propiedad privada de Lorena Torbellino.
+        </span>
+        <button @click="modalOpen = false" class="px-5 py-2 rounded-full bg-white border border-torbellino-sand text-xs font-black text-torbellino-plum hover:bg-torbellino-sand transition shrink-0">
           Cerrar
         </button>
       </div>
