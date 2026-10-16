@@ -100,19 +100,29 @@ La tipografía debe sentirse cercana, moderna y legible con buena dosis de perso
 - **Estructura Estática Local:**
   ```text
   www.lorenatorbellino.raupulus.dev/
-  ├── index.html
-  ├── assets/
-  │   ├── css/
-  │   │   └── tailwind.css         # CSS compilado local (cero CDN)
-  │   ├── js/
-  │   │   └── alpine.min.js        # Micro-framework local para reactividad
-  │   └── images/
-  │       ├── lorena_logo_oficial.png
-  │       ├── lorena_sticker_guiño.png
-  │       ├── lorena_avatar.jpg
-  │       └── lorena_banner.jpg
-  └── docs/
-      └── info/
-          └── DESIGN.md
+  ├── songs.json               # Fuente única de verdad de canciones
+  ├── AGENTS.md                # Documento maestro de reglas y contexto
+  ├── LICENSE                  # Licencia dual (AGPLv3 código / privada música)
+  ├── docs/
+  │   └── info/
+  │       └── DESIGN.md
+  └── public/                  # DocumentRoot web estática 100% aislada
+      ├── index.html
+      ├── quien-es-lorena.html
+      ├── songs.json
+      └── assets/
+          ├── css/tailwind.css
+          ├── js/
+          │   ├── alpine.min.js
+          │   └── songs-data.js
+          └── images/
+              ├── favicon.png / favicon.webp
+              ├── og_home.jpg / og_quien_es.jpg
+              ├── lorena_avatar.webp
+              ├── lorena_banner.webp
+              ├── lorena_sticker_guino.webp
+              ├── albums/
+              ├── covers/
+              └── traits/
   ```
 - **Sin recursos externos:** No se permite cargar fuentes de Google Fonts, scripts de CDNs (cdnjs, unpkg) ni imágenes externas en tiempo de ejecución.

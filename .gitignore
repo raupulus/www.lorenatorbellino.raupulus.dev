@@ -1,11 +1,13 @@
 # Dependencies
 node_modules/
-package-lock.json
 
 # Environment and secrets
 .env
 .env.*
 !.env.example
+*.pem
+*.key
+*.cert
 
 # Python
 __pycache__/
@@ -14,23 +16,37 @@ __pycache__/
 .venv/
 venv/
 env/
+.pytest_cache/
 
 # OS files
 .DS_Store
+._*
+.Spotlight-V100
+.Trashes
 Thumbs.db
+ehthumbs.db
+desktop.ini
 *.swp
+*.swo
 *~
 
-# IDEs
+# IDEs and Editors
 .idea/
 .vscode/
 *.sublime-project
 *.sublime-workspace
 
-# Logs & temp
+# Logs and temp
 *.log
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 .temp/
 .cache/
+*.tmp
+*.bak
+scratch/
+
+# Agentic / Local AI tooling
+.gemini/
+.antigravity/
