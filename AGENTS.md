@@ -17,11 +17,12 @@
   - **Handle Oficial:** `@LorenaTorbellino` (alternativo: `@LorenaTorbellinoOficial`)
   - **Enlace:** `https://www.youtube.com/@LorenaTorbellino`
   - **Enlace de suscripción directa:** `https://www.youtube.com/@LorenaTorbellino?sub_confirmation=1`
-- **Catálogo Oficial de Discos (4 Álbumes):**
-  1. `Cosas de la vida real` (CD 1)
-  2. `Me pasa de todo` (CD 2)
-  3. `Que locura` (CD 3)
-  4. `Problemas de viejoven` (CD 4)
+- **Catálogo Oficial de Discos (Actualmente 4 Álbumes y en expansión):**
+  1. `Cosas de la vida real` (CD 1 - 21 Canciones)
+  2. `Me pasa de todo` (CD 2 - 33 Canciones)
+  3. `Que locura` (CD 3 - 32 Canciones)
+  4. `Problemas de viejoven` (CD 4 - 24 Canciones)
+  *(El proyecto continuará agregando nuevos discos como CD 5, etc.).*
 
 ---
 
@@ -42,16 +43,21 @@
 > **POLÍTICA DE CERO ASSETS Y CDNs EXTERNOS EN TIEMPO DE EJECUCIÓN:**
 > Toda la web se sirve 100% con archivos locales incluidos en el repositorio Git.
 > - **PROHIBIDO:** Cargar Tailwind desde CDN, scripts desde `unpkg` / `cdnjs` o fuentes desde Google Fonts / Typekit.
-> - **PROHIBIDO:** Referenciar imágenes externas sin haber sido integradas en `assets/images/`.
+> - **PROHIBIDO:** Referenciar imágenes externas sin haber sido integradas en `assets/images/` o `assets/images/covers/`.
 
 ### Estructura de Directorios del Repositorio:
 ```text
 www.lorenatorbellino.raupulus.dev/
-├── index.html                  # Página principal de la web
+├── index.html                  # Página principal de la web compilada con todo el cancionero
 ├── tailwind.config.js          # Configuración de Tailwind CSS con paleta oficial
 ├── package.json                # Configuración de compilación Tailwind
 ├── .gitignore                  # Exclusiones git (node_modules, logs, etc.)
 ├── AGENTS.md                   # Este documento maestro de reglas
+├── data/
+│   └── songs.json              # Base de datos JSON de todas las canciones de todos los discos
+├── scripts/
+│   ├── sync_songs.py           # Sincroniza videoclips desde el almacenamiento a data/songs.json
+│   └── build_site.py           # Compila data/songs.json dentro de index.html
 ├── src/
 │   └── input.css               # CSS de entrada con directivas Tailwind y @layer
 ├── assets/
@@ -63,7 +69,8 @@ www.lorenatorbellino.raupulus.dev/
 │       ├── lorena_logo_oficial.png
 │       ├── lorena_sticker_guiño.png
 │       ├── lorena_avatar.jpg
-│       └── lorena_banner.jpg
+│       ├── lorena_banner.jpg
+│       └── covers/             # Miniaturas 16:9 oficiales de cada canción
 └── docs/
     └── info/
         └── DESIGN.md           # Sistema de diseño, paleta y componentes UI
@@ -71,7 +78,71 @@ www.lorenatorbellino.raupulus.dev/
 
 ---
 
-## 4. SISTEMA DE DISEÑO Y PALETA DE COLOR OFICIAL
+## 4. PATRÓN DE INSERCIÓN Y CATEGORIZACIÓN AL AÑADIR NUEVAS CANCIONES Y DISCOS
+
+> [!IMPORTANT]
+> **PROTOCOLO OBLIGATORIO AL AÑADIR CANCIONES O NUEVOS DISCOS:**
+> A medida que se produzcan nuevas canciones y se agreguen nuevos discos (CD 5 en adelante), se debe seguir rigurosamente este patrón determinista para mantener la web actualizada, coherente y navegable.
+
+### 4.1. Taxonomía Oficial de Relatos Temáticos (Filtro de Relatos)
+Cada canción debe asignarse obligatoriamente a una de las **5 categorías de relato cómico**:
+
+| ID Relato (`relato_id`) | Nombre Visible (`relato_label`) | Icono | Temática y Palabras Clave |
+| :--- | :--- | :---: | :--- |
+| `viejoven` | **Crisis de Viejoven** | 🦴 | Dolores corporales prematuros a los 20, lumbago, huesos, cansancio, salud, achaques, reuma, vejez. |
+| `desastres-absurdos` | **Desastres Cotidianos** | 💥 | Fregadero atascado, cocina ardiendo, comida quemada, perder el coche en el parking, estropajos, peleas con electrodomésticos, huir de la policía. |
+| `citas-social` | **Citas & Vida Social** | 💬 | Citas románticas desastrosas, novios tacaños, hablar por los codos, jefes pesados en la oficina, cotilleos vecinales, amigos. |
+| `vida-cotidiana` | **Vida Real & Rutina** | 🛋️ | Pereza legendaria, sofá, procrastinar, rebajas online, perder llaves, madrugar, videojuegos acumulados, día a día. |
+| `campo-animales` | **Animales & Campo** | 🐾 | Animales cómicos, huerta ecológica, topos en el jardín, burrito Porroncio, ponis, ovejas-ratas, mascotas. |
+
+### 4.2. Esquema Normalizado de Canción (`data/songs.json`)
+Toda nueva canción añadida debe respetar esta estructura exacta:
+```json
+{
+  "id": 111,
+  "track_number": 1,
+  "title": "Nombre Limpio de la Canción",
+  "slug": "cdX-nombre-limpio-de-la-cancion",
+  "album": "Nombre del Álbum",
+  "album_id": "cdX",
+  "album_badge": "CD X",
+  "album_color": "torbellino-coral",
+  "duration": "03:15",
+  "duration_seconds": 195.0,
+  "relato_id": "viejoven",
+  "relato_label": "Crisis de Viejoven",
+  "synopsis": "Gancho cómico descriptivo de 2-3 líneas sobre lo que le ocurre a Lorena.",
+  "lyrics": "Letra completa de la canción...",
+  "has_video": true,
+  "has_custom_cover": true,
+  "cover_image": "assets/images/covers/cdX-nombre-limpio-de-la-cancion.jpg",
+  "youtube_id": "",
+  "youtube_url": "https://www.youtube.com/@LorenaTorbellino"
+}
+```
+
+### 4.3. Flujo Automatizado de Sincronización y Compilación
+Cuando se agreguen canciones o portadas en el directorio de producción de videoclips:
+1. Ejecutar el sincronizador para actualizar `data/songs.json` y copiar miniaturas a `assets/images/covers/`:
+   ```bash
+   python3 scripts/sync_songs.py
+   ```
+2. Reconstruir la página estática [index.html](index.html) con el cancionero actualizado:
+   ```bash
+   python3 scripts/build_site.py
+   ```
+3. Si se han incorporado nuevas clases de utilidad o identificadores de color de Tailwind, recompilar el CSS:
+   ```bash
+   npx tailwindcss -i ./src/input.css -o ./assets/css/tailwind.css --minify
+   ```
+4. Confirmar los cambios con un commit descriptivo en Git:
+   ```bash
+   git add data/ assets/ index.html && git commit -m "feat(catalog): sincronizar nuevas canciones y portadas"
+   ```
+
+---
+
+## 5. SISTEMA DE DISEÑO Y PALETA DE COLOR OFICIAL
 
 La paleta se define en [tailwind.config.js](tailwind.config.js) bajo el espacio de nombres `torbellino-*`:
 
@@ -89,29 +160,30 @@ La paleta se define en [tailwind.config.js](tailwind.config.js) bajo el espacio 
 
 ---
 
-## 5. ESTÁNDARES DE ACCESIBILIDAD (A11Y), W3C Y RESPONSIVE
+## 6. ESTÁNDARES DE ACCESIBILIDAD (A11Y), W3C Y RESPONSIVE
 
 1. **Jerarquía Semántica de Encabezados (W3C Sequentially Descending Order):**
    - Jamás saltar niveles de encabezados (`H1` ➔ `H2` ➔ `H3`).
    - `H1`: Título principal del sitio / página.
-   - `H2`: Secciones principales (Discos, Videoclips, Sobre Lorena, etc.).
+   - `H2`: Secciones principales (Discos, Cancionero Oficial, Sobre Lorena, etc.).
    - `H3`: Tarjetas individuales de álbumes, videoclips o bloques del footer.
 2. **Contraste de Color WCAG AA:**
    - Mínimo 4.5:1 en texto estándar y 7:1 en textos reducidos/badges.
    - Sobre fondos claros (`#FFF9F5` o `#FFFFFF`), usar `#291C22`, `#3F173B` o `#4A3842`.
 3. **Navegación por Teclado y Foco Visible:**
    - Todo botón y enlace debe ser accesible vía `Tab`.
-   - Modales o menús desplegables deben cerrarse con `Escape` y contar con botón de cierre claro.
+   - Modales deben cerrarse con la tecla `Escape` (`@keydown.escape.window="modalOpen = false"`) y contar con botón de cierre claro.
 4. **Textos Alternativos (`alt`) Obligatorios:**
    - Todas las imágenes `<img>` deben incluir un atributo `alt` específico y descriptivo en castellano.
    - Íconos decorativos o elementos auxiliares deben llevar `aria-hidden="true"`.
 5. **Prevención de CLS y Optimización Móvil:**
    - Botones y controles táctiles con área mínima de 44x44px.
+   - Carga diferida (`loading="lazy"`) en miniaturas del cancionero.
    - Tipografía adaptada para evitar zoom accidental en navegadores móviles.
 
 ---
 
-## 6. REGLA ESTRICTA DE NOMENCLATURA Y TÍTULOS EN YOUTUBE Y MEDIOS
+## 7. REGLA ESTRICTA DE NOMENCLATURA Y TÍTULOS EN YOUTUBE Y MEDIOS
 
 > [!IMPORTANT]
 > **Formato Oficial de Títulos de Canciones:**
@@ -121,16 +193,3 @@ La paleta se define en [tailwind.config.js](tailwind.config.js) bajo el espacio 
 > - En Plataformas / DSPs:  
 >   `{Título de la Canción}` (estrictamente el nombre limpio de la pista, sin sufijos de artista ni número de pista).
 > - **PROHIBIDO:** NUNCA colocar "Lorena Torbellino" antes del título de la pista en los vídeos de YouTube.
-
----
-
-## 7. FLUJO DE TRABAJO PARA CAMBIOS Y COMPILACIÓN
-
-Cada vez que se realicen modificaciones en el diseño HTML o en las clases de utilidad:
-1. Editar [index.html](index.html) o los archivos de plantilla correspondientes.
-2. Si se añaden nuevas clases de Tailwind o estilos personalizados, recompilar el CSS localmente:
-   ```bash
-   npx tailwindcss -i ./src/input.css -o ./assets/css/tailwind.css --minify
-   ```
-3. Verificar que no se generen errores de compilación y que `assets/css/tailwind.css` se actualice.
-4. Mantener el repositorio Git limpio realizando commits estructurados con mensajes descriptivos según Conventional Commits (`feat:`, `fix:`, `docs:`, `style:`).
