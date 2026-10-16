@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lorena Torbellino — Web Oficial | Canciones y Desastres</title>
+  <meta name="description" content="Página oficial de Lorena Torbellino. Pop cómico, canciones absurdas, desventuras cotidianas y videoclips animados en 2D.">
+  <link rel="icon" type="image/png" href="assets/images/lorena_logo_oficial.png">
+  <link rel="stylesheet" href="assets/css/tailwind.css">
+  <script defer src="assets/js/alpine.min.js"></script>
+</head>
+<body class="min-h-screen bg-torbellino-cream font-sans antialiased text-[#291C22]" x-data="{ mobileMenuOpen: false, activeTab: 'todos' }">
+
+  <!-- Top Announcement Bar -->
+  <aside aria-label="Aviso destacado" class="bg-gradient-to-r from-torbellino-coral via-torbellino-peach to-torbellino-coral text-torbellino-plum text-xs md:text-sm font-bold py-2 px-4 text-center shadow-inner flex items-center justify-center gap-2">
+    <span>👟</span>
+    <span>¡Canal oficial en marcha! Nuevos videoclips animados cada semana</span>
+    <a href="https://www.youtube.com/@LorenaTorbellino" target="_blank" rel="noopener noreferrer" class="underline hover:text-torbellino-wine transition ml-1 inline-flex items-center gap-1">
+      Ir a YouTube →
+    </a>
+  </aside>
+
+  <!-- Navbar -->
+  <header class="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-torbellino-sand/80 shadow-sm transition">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      
+      <!-- Brand Logo -->
+      <a href="#" class="flex items-center gap-3 group">
+        <div class="relative w-12 h-12 rounded-full overflow-hidden border-2 border-torbellino-coral shadow-md group-hover:scale-105 transition transform duration-200">
+          <img src="assets/images/lorena_avatar.jpg" alt="Lorena Torbellino" class="w-full h-full object-cover">
+        </div>
+        <div class="flex flex-col">
+          <span class="text-xl md:text-2xl font-extrabold tracking-tight bg-gradient-to-r from-torbellino-coral to-torbellino-wine bg-clip-text text-transparent">
+            Lorena Torbellino
+          </span>
+          <span class="text-xs font-semibold text-torbellino-denim tracking-wider uppercase">
+            Canciones y Desastres
+          </span>
+        </div>
+      </a>
+
+      <!-- Desktop Nav -->
+      <nav class="hidden md:flex items-center gap-8 font-semibold text-sm text-[#4A3842]">
+        <a href="#inicio" class="hover:text-torbellino-coral transition">Inicio</a>
+        <a href="#discos" class="hover:text-torbellino-coral transition">Discos</a>
+        <a href="#videoclips" class="hover:text-torbellino-coral transition">Videoclips</a>
+        <a href="#sobre-mi" class="hover:text-torbellino-coral transition">Quién es Lorena</a>
+        <a href="#contacto" class="hover:text-torbellino-coral transition">Contacto</a>
+      </nav>
+
+      <!-- Desktop Action CTA -->
+      <div class="hidden md:flex items-center gap-4">
+        <a href="https://www.youtube.com/@LorenaTorbellino" target="_blank" rel="noopener noreferrer" 
+           class="inline-flex items-center gap-2 bg-gradient-to-r from-torbellino-coral to-torbellino-red text-white font-bold text-sm px-5 py-2.5 rounded-full shadow-md shadow-red-500/20 hover:shadow-lg hover:shadow-red-500/30 hover:scale-105 transition duration-200">
+          <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+          <span>Suscribirme</span>
+        </a>
+      </div>
+
+      <!-- Mobile Menu Toggle Button -->
+      <div class="md:hidden flex items-center">
+        <button @click="mobileMenuOpen = !mobileMenuOpen" type="button" class="p-2 rounded-xl text-torbellino-plum hover:bg-torbellino-sand/50 transition" aria-label="Menú">
+          <svg x-show="!mobileMenuOpen" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"/></svg>
+          <svg x-show="mobileMenuOpen" x-cloak class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+      </div>
+
+    </div>
+
+    <!-- Mobile Dropdown -->
+    <div x-show="mobileMenuOpen" x-cloak @click.away="mobileMenuOpen = false" class="md:hidden border-b border-torbellino-sand bg-white px-4 pt-3 pb-6 space-y-3 font-semibold text-sm">
+      <a @click="mobileMenuOpen = false" href="#inicio" class="block py-2 text-[#4A3842] hover:text-torbellino-coral">Inicio</a>
+      <a @click="mobileMenuOpen = false" href="#discos" class="block py-2 text-[#4A3842] hover:text-torbellino-coral">Discos</a>
+      <a @click="mobileMenuOpen = false" href="#videoclips" class="block py-2 text-[#4A3842] hover:text-torbellino-coral">Videoclips</a>
+      <a @click="mobileMenuOpen = false" href="#sobre-mi" class="block py-2 text-[#4A3842] hover:text-torbellino-coral">Quién es Lorena</a>
+      <a @click="mobileMenuOpen = false" href="#contacto" class="block py-2 text-[#4A3842] hover:text-torbellino-coral">Contacto</a>
+      <div class="pt-2">
+        <a href="https://www.youtube.com/@LorenaTorbellino" target="_blank" rel="noopener noreferrer" 
+           class="flex items-center justify-center gap-2 w-full bg-gradient-to-r from-torbellino-coral to-torbellino-red text-white py-3 rounded-xl font-bold shadow-md">
+          <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+          <span>Ir a YouTube Oficial</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <main id="inicio" class="relative overflow-hidden pt-10 pb-16 md:pt-16 md:pb-24">
+    <!-- Background Glows -->
+    <div class="absolute -top-24 left-1/2 -translate-x-1/2 w-full max-w-7xl h-96 bg-gradient-to-br from-torbellino-peach/40 via-torbellino-lilac/30 to-transparent rounded-full blur-3xl -z-10 pointer-events-none"></div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        
+        <!-- Text Column -->
+        <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+          
+          <!-- Badge -->
+          <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-torbellino-sand/80 border border-torbellino-coral/30 text-xs md:text-sm font-bold text-torbellino-wine">
+            <span class="inline-block w-2.5 h-2.5 rounded-full bg-torbellino-coral animate-pulse"></span>
+            <span>Pop Cómico & Animación 2D</span>
+          </div>
+
+          <!-- Main Title -->
+          <h1 class="text-4xl sm:text-5xl md:text-6xl font-black tracking-tight leading-tight">
+            Canto mis desastres con ritmo, zapatillas rojas y 
+            <span class="block bg-gradient-to-r from-torbellino-coral via-[#FF5F45] to-torbellino-wine bg-clip-text text-transparent">
+              cero sentido del ridículo.
+            </span>
+          </h1>
+
+          <!-- Subtitle -->
+          <p class="text-base sm:text-lg md:text-xl text-[#5C4550] max-w-2xl mx-auto lg:mx-0 font-medium">
+            Tengo 20 años, voz dulce de niña buena y un talento casi sobrenatural para que todo en la vida me salga al revés. ¡Bienvenido al caos más divertido de internet!
+          </p>
+
+          <!-- CTAs -->
+          <div class="flex flex-wrap items-center justify-center lg:justify-start gap-4 pt-2">
+            <a href="#discos" class="bg-gradient-to-r from-torbellino-coral to-torbellino-wine text-white font-extrabold px-8 py-3.5 rounded-full shadow-lg shadow-torbellino-coral/30 hover:scale-105 hover:shadow-xl transition duration-200 flex items-center gap-2">
+              <span>Explorar los 4 Discos</span>
+              <span>↓</span>
+            </a>
+            <a href="https://www.youtube.com/@LorenaTorbellino" target="_blank" rel="noopener noreferrer" 
+               class="bg-white hover:bg-torbellino-sand/40 text-torbellino-plum border-2 border-torbellino-sand font-bold px-7 py-3 rounded-full hover:border-torbellino-coral/50 transition duration-200 flex items-center gap-2 shadow-sm">
+              <svg class="w-4 h-4 text-red-600 fill-current" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+              <span>Canal de YouTube</span>
+            </a>
+          </div>
+
+          <!-- Mini Stats / Gags -->
+          <div class="pt-6 grid grid-cols-3 gap-4 border-t border-torbellino-sand/80 max-w-lg mx-auto lg:mx-0">
+            <div>
+              <div class="text-2xl font-black text-torbellino-coral">4</div>
+              <div class="text-xs font-semibold text-[#735A66]">Álbumes Cómicos</div>
+            </div>
+            <div>
+              <div class="text-2xl font-black text-torbellino-denim">100%</div>
+              <div class="text-xs font-semibold text-[#735A66]">Basado en Hechos Reales</div>
+            </div>
+            <div>
+              <div class="text-2xl font-black text-torbellino-wine">0%</div>
+              <div class="text-xs font-semibold text-[#735A66]">Vergüenza Ajena</div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Visual / Sticker Card Column -->
+        <div class="lg:col-span-5 flex justify-center">
+          <div class="relative w-full max-w-md">
+            
+            <!-- Deco circles -->
+            <div class="absolute -top-6 -right-6 w-24 h-24 bg-torbellino-peach/70 rounded-full blur-xl -z-10"></div>
+            <div class="absolute -bottom-8 -left-6 w-32 h-32 bg-torbellino-mint/40 rounded-full blur-xl -z-10"></div>
+
+            <!-- Card Frame -->
+            <div class="bg-white rounded-3xl p-5 border-4 border-white shadow-2xl shadow-torbellino-coral/15 ring-1 ring-torbellino-sand/80 transform rotate-1 hover:rotate-0 transition duration-300">
+              
+              <div class="relative rounded-2xl overflow-hidden bg-gradient-to-b from-[#FDE8DF] via-[#FCEAE3] to-[#FBE4DD] aspect-[4/5] flex items-center justify-center p-4">
+                <img src="assets/images/lorena_sticker_guiño.png" alt="Lorena Torbellino haciendo el signo de la victoria" class="w-full h-full object-contain filter drop-shadow-md">
+                
+                <!-- Floating comic sticker badge -->
+                <div class="absolute bottom-4 left-4 right-4 bg-white/95 backdrop-blur-sm rounded-2xl p-3 shadow-lg border border-torbellino-sand flex items-center justify-between">
+                  <div class="flex items-center gap-2.5">
+                    <span class="text-2xl">✨</span>
+                    <div>
+                      <div class="text-xs font-extrabold text-torbellino-plum">Lorena Torbellino</div>
+                      <div class="text-[11px] font-medium text-torbellino-wine">Voz dulce · Zapatillas rojas</div>
+                    </div>
+                  </div>
+                  <span class="px-2.5 py-1 rounded-full text-[11px] font-bold bg-torbellino-coral/15 text-torbellino-coral">
+                    @LorenaTorbellino
+                  </span>
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- Discography Section -->
+  <section id="discos" class="py-16 md:py-24 bg-white border-y border-torbellino-sand">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center max-w-2xl mx-auto mb-14 space-y-3">
+        <h2 class="text-xs font-bold uppercase tracking-widest text-torbellino-coral">Discografía Completa</h2>
+        <p class="text-3xl sm:text-4xl font-black text-torbellino-plum">Los 4 Álbumes Oficiales</p>
+        <p class="text-sm sm:text-base text-[#6E5562]">
+          Canciones de comedia, pop acústico y desventuras que todo viejoven de 20 a 50 años ha vivido en carne propia.
+        </p>
+      </div>
+
+      <!-- Albums Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        
+        <!-- Disco 1 -->
+        <article class="group bg-torbellino-cream rounded-3xl p-6 border-2 border-torbellino-sand hover:border-torbellino-coral/50 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <span class="px-3 py-1 rounded-full text-xs font-black bg-torbellino-coral text-white">CD 1</span>
+              <span class="text-xs font-semibold text-torbellino-wine">32 Canciones</span>
+            </div>
+            <div class="aspect-square rounded-2xl bg-gradient-to-br from-[#FFE3DC] to-[#FCD499]/60 flex items-center justify-center p-4 mb-5 border border-torbellino-sand group-hover:scale-105 transition duration-300">
+              <span class="text-5xl">☕</span>
+            </div>
+            <h3 class="text-xl font-extrabold text-torbellino-plum mb-2 group-hover:text-torbellino-coral transition">
+              Cosas de la vida real
+            </h3>
+            <p class="text-xs text-[#6B5660] leading-relaxed">
+              La odisea de madurar, buscar aparcamiento en el súper, perder llaves y las peleas cotidianas contra el despertador.
+            </p>
+          </div>
+          <div class="mt-6 pt-4 border-t border-torbellino-sand/80 flex items-center justify-between text-xs font-bold text-torbellino-coral">
+            <span>Ver repertorio</span>
+            <span class="group-hover:translate-x-1 transition">→</span>
+          </div>
+        </article>
+
+        <!-- Disco 2 -->
+        <article class="group bg-torbellino-cream rounded-3xl p-6 border-2 border-torbellino-sand hover:border-torbellino-coral/50 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <span class="px-3 py-1 rounded-full text-xs font-black bg-torbellino-denim text-white">CD 2</span>
+              <span class="text-xs font-semibold text-torbellino-wine">24 Canciones</span>
+            </div>
+            <div class="aspect-square rounded-2xl bg-gradient-to-br from-[#D9E6F2] to-[#B1CAB2]/60 flex items-center justify-center p-4 mb-5 border border-torbellino-sand group-hover:scale-105 transition duration-300">
+              <span class="text-5xl">⚡</span>
+            </div>
+            <h3 class="text-xl font-extrabold text-torbellino-plum mb-2 group-hover:text-torbellino-coral transition">
+              Me pasa de todo
+            </h3>
+            <p class="text-xs text-[#6B5660] leading-relaxed">
+              La ley de Murphy hecha melodía: tostadas que caen del lado de la mantequilla e inundaciones en el salón por tocar una tuerca.
+            </p>
+          </div>
+          <div class="mt-6 pt-4 border-t border-torbellino-sand/80 flex items-center justify-between text-xs font-bold text-torbellino-denim">
+            <span>Ver repertorio</span>
+            <span class="group-hover:translate-x-1 transition">→</span>
+          </div>
+        </article>
+
+        <!-- Disco 3 -->
+        <article class="group bg-torbellino-cream rounded-3xl p-6 border-2 border-torbellino-sand hover:border-torbellino-coral/50 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <span class="px-3 py-1 rounded-full text-xs font-black bg-torbellino-wine text-white">CD 3</span>
+              <span class="text-xs font-semibold text-torbellino-wine">24 Canciones</span>
+            </div>
+            <div class="aspect-square rounded-2xl bg-gradient-to-br from-[#F5D8E6] to-[#CAA5D9]/60 flex items-center justify-center p-4 mb-5 border border-torbellino-sand group-hover:scale-105 transition duration-300">
+              <span class="text-5xl">🌪️</span>
+            </div>
+            <h3 class="text-xl font-extrabold text-torbellino-plum mb-2 group-hover:text-torbellino-coral transition">
+              Que locura
+            </h3>
+            <p class="text-xs text-[#6B5660] leading-relaxed">
+              Situaciones surrealistas, citas cómicas que salen mal, vecinos peculiares y compras impulsivas por internet de cosas inútiles.
+            </p>
+          </div>
+          <div class="mt-6 pt-4 border-t border-torbellino-sand/80 flex items-center justify-between text-xs font-bold text-torbellino-wine">
+            <span>Ver repertorio</span>
+            <span class="group-hover:translate-x-1 transition">→</span>
+          </div>
+        </article>
+
+        <!-- Disco 4 -->
+        <article class="group bg-torbellino-cream rounded-3xl p-6 border-2 border-torbellino-sand hover:border-torbellino-coral/50 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <span class="px-3 py-1 rounded-full text-xs font-black bg-torbellino-plum text-white">CD 4</span>
+              <span class="text-xs font-semibold text-torbellino-wine">30 Canciones</span>
+            </div>
+            <div class="aspect-square rounded-2xl bg-gradient-to-br from-[#FDE3CF] to-[#F87157]/40 flex items-center justify-center p-4 mb-5 border border-torbellino-sand group-hover:scale-105 transition duration-300">
+              <span class="text-5xl">🦴</span>
+            </div>
+            <h3 class="text-xl font-extrabold text-torbellino-plum mb-2 group-hover:text-torbellino-coral transition">
+              Problemas de viejoven
+            </h3>
+            <p class="text-xs text-[#6B5660] leading-relaxed">
+              Dolores de espalda prematuros a los 20 años, ilusión desmedida por una freidora de aire y preferir dormir a salir de fiesta.
+            </p>
+          </div>
+          <div class="mt-6 pt-4 border-t border-torbellino-sand/80 flex items-center justify-between text-xs font-bold text-torbellino-plum">
+            <span>Ver repertorio</span>
+            <span class="group-hover:translate-x-1 transition">→</span>
+          </div>
+        </article>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Video Gallery / Highlights Section (Wireframe visual) -->
+  <section id="videoclips" class="py-16 md:py-24">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
+        <div>
+          <span class="text-xs font-bold uppercase tracking-widest text-torbellino-coral">Producciones Animadas</span>
+          <h2 class="text-3xl sm:text-4xl font-black text-torbellino-plum mt-1">Videoclips Destacados</h2>
+          <p class="text-sm text-[#6E5562] mt-2">Maquetas de diseño para la integración futura del reproductor y catálogo audiovisual.</p>
+        </div>
+        
+        <!-- Filter Tabs (Alpine.js Interactive State) -->
+        <div class="flex items-center gap-2 p-1.5 bg-torbellino-sand/60 rounded-2xl border border-torbellino-sand text-xs font-bold">
+          <button @click="activeTab = 'todos'" :class="activeTab === 'todos' ? 'bg-white text-torbellino-coral shadow-sm' : 'text-[#6B5660] hover:text-torbellino-coral'" class="px-4 py-2 rounded-xl transition">
+            Todos
+          </button>
+          <button @click="activeTab = 'cd1'" :class="activeTab === 'cd1' ? 'bg-white text-torbellino-coral shadow-sm' : 'text-[#6B5660] hover:text-torbellino-coral'" class="px-4 py-2 rounded-xl transition">
+            CD 1
+          </button>
+          <button @click="activeTab = 'cd4'" :class="activeTab === 'cd4' ? 'bg-white text-torbellino-coral shadow-sm' : 'text-[#6B5660] hover:text-torbellino-coral'" class="px-4 py-2 rounded-xl transition">
+            CD 4
+          </button>
+        </div>
+      </div>
+
+      <!-- Video Cards Grid Preview -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        
+        <!-- Card 1 -->
+        <div class="bg-white rounded-3xl overflow-hidden border-2 border-torbellino-sand shadow-sm hover:shadow-xl transition-all duration-300 group">
+          <div class="relative aspect-video bg-gradient-to-tr from-torbellino-coral/20 via-torbellino-peach/30 to-torbellino-lilac/30 flex items-center justify-center">
+            <span class="text-4xl">🎬</span>
+            <div class="absolute bottom-3 right-3 bg-torbellino-plum/80 text-white text-[11px] font-bold px-2 py-0.5 rounded-md">
+              03:12
+            </div>
+            <!-- Play hover indicator -->
+            <div class="absolute inset-0 bg-torbellino-plum/20 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
+              <div class="w-12 h-12 rounded-full bg-torbellino-coral text-white flex items-center justify-center shadow-lg transform group-hover:scale-110 transition">
+                ▶
+              </div>
+            </div>
+          </div>
+          <div class="p-6">
+            <div class="flex items-center gap-2 mb-2">
+              <span class="text-[10px] font-black px-2 py-0.5 rounded-full bg-torbellino-peach text-torbellino-plum">Viejoven</span>
+              <span class="text-xs text-[#826C78]">CD 4</span>
+            </div>
+            <h3 class="font-extrabold text-base text-torbellino-plum group-hover:text-torbellino-coral transition">
+              Espalda de Ochenta Años
+            </h3>
+            <p class="text-xs text-[#6B5660] mt-1.5 leading-relaxed">
+              Levantarse del sofá y sonar como una bolsa de patatas fritas crujientes.
+            </p>
+          </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="bg-white rounded-3xl overflow-hidden border-2 border-torbellino-sand shadow-sm hover:shadow-xl transition-all duration-300 group">
+          <div class="relative aspect-video bg-gradient-to-tr from-torbellino-denim/20 via-torbellino-mint/30 to-torbellino-peach/30 flex items-center justify-center">
+            <span class="text-4xl">🧺</span>
+            <div class="absolute bottom-3 right-3 bg-torbellino-plum/80 text-white text-[11px] font-bold px-2 py-0.5 rounded-md">
+              02:48
+            </div>
+            <div class="absolute inset-0 bg-torbellino-plum/20 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
+              <div class="w-12 h-12 rounded-full bg-torbellino-denim text-white flex items-center justify-center shadow-lg transform group-hover:scale-110 transition">
+                ▶
+              </div>
+            </div>
+          </div>
+          <div class="p-6">
+            <div class="flex items-center gap-2 mb-2">
+              <span class="text-[10px] font-black px-2 py-0.5 rounded-full bg-torbellino-mint text-torbellino-plum">Vida Real</span>
+              <span class="text-xs text-[#826C78]">CD 1</span>
+            </div>
+            <h3 class="font-extrabold text-base text-torbellino-plum group-hover:text-torbellino-coral transition">
+              El Monstruo de la Lavadora
+            </h3>
+            <p class="text-xs text-[#6B5660] mt-1.5 leading-relaxed">
+              ¿Por qué siempre entra un par de calcetines y sale solo uno huérfano?
+            </p>
+          </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="bg-white rounded-3xl overflow-hidden border-2 border-torbellino-sand shadow-sm hover:shadow-xl transition-all duration-300 group">
+          <div class="relative aspect-video bg-gradient-to-tr from-torbellino-wine/20 via-torbellino-lilac/30 to-torbellino-coral/20 flex items-center justify-center">
+            <span class="text-4xl">🛒</span>
+            <div class="absolute bottom-3 right-3 bg-torbellino-plum/80 text-white text-[11px] font-bold px-2 py-0.5 rounded-md">
+              03:05
+            </div>
+            <div class="absolute inset-0 bg-torbellino-plum/20 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
+              <div class="w-12 h-12 rounded-full bg-torbellino-wine text-white flex items-center justify-center shadow-lg transform group-hover:scale-110 transition">
+                ▶
+              </div>
+            </div>
+          </div>
+          <div class="p-6">
+            <div class="flex items-center gap-2 mb-2">
+              <span class="text-[10px] font-black px-2 py-0.5 rounded-full bg-torbellino-lilac text-torbellino-plum">Qué Locura</span>
+              <span class="text-xs text-[#826C78]">CD 3</span>
+            </div>
+            <h3 class="font-extrabold text-base text-torbellino-plum group-hover:text-torbellino-coral transition">
+              Perdida en el Parking B-3
+            </h3>
+            <p class="text-xs text-[#6B5660] mt-1.5 leading-relaxed">
+              Dos horas apretando el mando a distancia rezando para ver una luz parpadear.
+            </p>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- About Lorena Section -->
+  <section id="sobre-mi" class="py-16 md:py-24 bg-white border-t border-torbellino-sand">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="bg-gradient-to-br from-torbellino-cream via-white to-torbellino-peach/20 rounded-3xl border-2 border-torbellino-sand p-8 md:p-14 shadow-lg">
+        
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+          
+          <div class="lg:col-span-4 flex justify-center">
+            <div class="relative w-56 h-56 rounded-full overflow-hidden border-4 border-torbellino-coral shadow-xl">
+              <img src="assets/images/lorena_avatar.jpg" alt="Foto de perfil de Lorena Torbellino" class="w-full h-full object-cover">
+            </div>
+          </div>
+
+          <div class="lg:col-span-8 space-y-4 text-center lg:text-left">
+            <span class="text-xs font-bold uppercase tracking-widest text-torbellino-coral">Ficha de Identidad</span>
+            <h2 class="text-3xl sm:text-4xl font-black text-torbellino-plum">
+              ¿Quién es Lorena Torbellino?
+            </h2>
+            <p class="text-sm sm:text-base text-[#5C4550] leading-relaxed">
+              Lorena es una joven española de 20 años, carismática, alegre y con un toque descarado. Con su dulce voz casi infantil y sus inseparables zapatillas Converse rojas, pone melodía a las pequeñas tragedias absurdas del día a día: la pereza legendaria, las compras impulsivas, las comidas quemadas y las crisis existenciales de viejoven.
+            </p>
+            <div class="pt-2 flex flex-wrap justify-center lg:justify-start gap-2">
+              <span class="px-3.5 py-1.5 rounded-full text-xs font-bold bg-white border border-torbellino-sand text-torbellino-plum shadow-sm">
+                👟 Converse Rojas Bajas
+              </span>
+              <span class="px-3.5 py-1.5 rounded-full text-xs font-bold bg-white border border-torbellino-sand text-torbellino-plum shadow-sm">
+                🎀 Moño Alto con Pinza Negra
+              </span>
+              <span class="px-3.5 py-1.5 rounded-full text-xs font-bold bg-white border border-torbellino-sand text-torbellino-plum shadow-sm">
+                ✨ Pecas en Nariz y Mejillas
+              </span>
+              <span class="px-3.5 py-1.5 rounded-full text-xs font-bold bg-white border border-torbellino-sand text-torbellino-plum shadow-sm">
+                🎵 Voz Dulce e Infantil
+              </span>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer id="contacto" class="bg-torbellino-dark text-white pt-16 pb-12 border-t-4 border-torbellino-coral">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-10 pb-12 border-b border-white/10">
+        
+        <!-- Brand Info -->
+        <div class="md:col-span-2 space-y-4">
+          <div class="flex items-center gap-3">
+            <span class="text-2xl font-black tracking-tight text-white">Lorena Torbellino</span>
+          </div>
+          <p class="text-xs text-white/70 max-w-md leading-relaxed">
+            Proyecto musical de comedia y sátira animada en 2D. Todas las situaciones y personajes son creaciones humorísticas de ficción para alegrar la rutina cotidiana.
+          </p>
+          <div class="pt-2">
+            <span class="text-xs text-white/50">Contacto profesional y licencias:</span>
+            <div class="text-sm font-semibold text-torbellino-peach">public@raupulus.dev</div>
+          </div>
+        </div>
+
+        <!-- Links -->
+        <div>
+          <h4 class="text-xs font-bold uppercase tracking-wider text-torbellino-peach mb-4">Secciones</h4>
+          <ul class="space-y-2 text-xs text-white/80">
+            <li><a href="#inicio" class="hover:text-torbellino-coral transition">Inicio</a></li>
+            <li><a href="#discos" class="hover:text-torbellino-coral transition">Catálogo de Discos</a></li>
+            <li><a href="#videoclips" class="hover:text-torbellino-coral transition">Videoclips Animados</a></li>
+            <li><a href="#sobre-mi" class="hover:text-torbellino-coral transition">Sobre Lorena</a></li>
+          </ul>
+        </div>
+
+        <!-- Social / YouTube -->
+        <div>
+          <h4 class="text-xs font-bold uppercase tracking-wider text-torbellino-peach mb-4">Canal Oficial</h4>
+          <p class="text-xs text-white/70 mb-4">
+            Disfruta de las animaciones oficiales y canciones completas en YouTube:
+          </p>
+          <a href="https://www.youtube.com/@LorenaTorbellino" target="_blank" rel="noopener noreferrer" 
+             class="inline-flex items-center gap-2 bg-torbellino-coral hover:bg-torbellino-red text-white text-xs font-bold px-4 py-2.5 rounded-full transition shadow-md">
+            <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            <span>@LorenaTorbellino</span>
+          </a>
+        </div>
+
+      </div>
+
+      <!-- Copyright -->
+      <div class="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-white/50 gap-4">
+        <div>
+          ℗ & © 2026 Lorena Torbellino. Todos los derechos reservados.
+        </div>
+        <div>
+          Desplegado 100% estático sin recursos externos.
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+</body>
+</html>
