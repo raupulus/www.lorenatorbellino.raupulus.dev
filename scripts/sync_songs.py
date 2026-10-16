@@ -5,10 +5,14 @@ import unicodedata
 import re
 import shutil
 import urllib.parse
+from PIL import Image
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 PROJECT_DIR = os.path.dirname(BASE_DIR)
-VIDEOCLIPS_DIR = "/Volumes/WAREHOUSE/pCloudDrive/Projects/4 - Discos/Lorena/videoclips"
+VIDEOCLIPS_DIR = os.environ.get(
+    "LORENA_VIDEOCLIPS_DIR",
+    os.path.abspath(os.path.join(PROJECT_DIR, "..", "Lorena", "videoclips"))
+)
 COVERS_DEST = os.path.join(PROJECT_DIR, "public", "assets", "images", "covers")
 DATA_FILE = os.path.join(PROJECT_DIR, "data", "songs.json")
 
@@ -95,23 +99,29 @@ for album_name, alb_meta in albums_info.items():
                 pass
                 
         mini_src = os.path.join(s_path, "youtube", "miniatura_youtube.jpg")
-        cover_filename = f"{slug}.jpg"
+        cover_filename = f"{slug}.webp"
         has_custom_cover = False
         if os.path.exists(mini_src):
             dest_cover = os.path.join(COVERS_DEST, cover_filename)
-            shutil.copyfile(mini_src, dest_cover)
-            has_custom_cover = True
+            try:
+                with Image.open(mini_src) as img:
+                    img.save(dest_cover, "WEBP", quality=85)
+                has_custom_cover = True
+            except Exception:
+                shutil.copyfile(mini_src, dest_cover.replace(".webp", ".jpg"))
+                cover_filename = f"{slug}.jpg"
+                has_custom_cover = True
             
         has_video = any(f.endswith("_1080p_watermark.mp4") for f in os.listdir(s_path))
         relato_id, relato_label = infer_relato_category(clean_title, lyrics, album_name)
         
         album_cover_map = {
-            'cd1': 'assets/images/albums/cd1_cosas_de_la_vida_real_web.jpg',
-            'cd2': 'assets/images/albums/cd2_me_pasa_de_todo_web.jpg',
-            'cd3': 'assets/images/albums/cd3_que_locura_web.jpg',
-            'cd4': 'assets/images/albums/cd4_problemas_de_viejoven_web.jpg'
+            'cd1': 'assets/images/albums/cd1_cosas_de_la_vida_real_web.webp',
+            'cd2': 'assets/images/albums/cd2_me_pasa_de_todo_web.webp',
+            'cd3': 'assets/images/albums/cd3_que_locura_web.webp',
+            'cd4': 'assets/images/albums/cd4_problemas_de_viejoven_web.webp'
         }
-        default_cover = album_cover_map.get(alb_meta['id'], 'assets/images/lorena_avatar.jpg')
+        default_cover = album_cover_map.get(alb_meta['id'], 'assets/images/lorena_avatar.webp')
 
         # Enlace directo al videoclip si está subido/producido, o al perfil oficial si aún no se ha publicado
         if has_video:

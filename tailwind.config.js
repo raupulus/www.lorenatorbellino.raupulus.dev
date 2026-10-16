@@ -9,6 +9,7 @@ module.exports = {
       colors: {
         torbellino: {
           coral: "#F87157",
+          "coral-dark": "#C83E2B",
           peach: "#FCD499",
           plum: "#3F173B",
           wine: "#78364D",

@@ -24,7 +24,7 @@
 - **Evidencia:**
   - `AGENTS.md:145`: `[public/index.html](file:///Users/<usuario_local>/git/3-Raupulus/www.lorenatorbellino.raupulus.dev/public/index.html)`
   - `AGENTS.md:162`: `[tailwind.config.js](file:///Users/<usuario_local>/git/3-Raupulus/www.lorenatorbellino.raupulus.dev/tailwind.config.js)`
-  - `scripts/sync_songs.py:11`: `VIDEOCLIPS_DIR = "/Volumes/WAREHOUSE/pCloudDrive/Projects/4 - Discos/Lorena/videoclips"`
+  - `scripts/sync_songs.py:11`: `VIDEOCLIPS_DIR = "/<ruta_externa>/Projects/4 - Discos/Lorena/videoclips"`
 - **Impacto:** Incumple la regla crítica de privacidad y seguridad (no exponer rutas absolutas de carpetas personales ni nombres de usuario del sistema operativo en archivos versionados del repositorio público).
 - **Fix propuesto:**
   1. En `AGENTS.md`, reemplazar enlaces `file:///Users/...` por rutas relativas del repositorio (`public/index.html`, `public/quien-es-lorena.html`, `tailwind.config.js`).

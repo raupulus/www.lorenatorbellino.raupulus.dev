@@ -142,7 +142,7 @@ Cuando se agreguen canciones o portadas en el directorio de producción de video
    ```bash
    python3 scripts/sync_songs.py
    ```
-2. Reconstruir la página estática [public/index.html](public/index.html) y [public/quien-es-lorena.html](public/quien-es-lorena.html) con el cancionero actualizado:
+2. Reconstruir la página estática `public/index.html` y `public/quien-es-lorena.html` con el cancionero actualizado:
    ```bash
    python3 scripts/build_site.py
    ```
@@ -159,7 +159,7 @@ Cuando se agreguen canciones o portadas en el directorio de producción de video
 
 ## 5. SISTEMA DE DISEÑO Y PALETA DE COLOR OFICIAL
 
-La paleta se define en [tailwind.config.js](tailwind.config.js) bajo el espacio de nombres `torbellino-*`:
+La paleta se define en `tailwind.config.js` bajo el espacio de nombres `torbellino-*`:
 
 - **Primario Coral:** `torbellino-coral` (`#F87157`) — Botones CTA principales, bordes de foco, detalles destacados.
 - **Melocotón Cálido:** `torbellino-peach` (`#FCD499`) — Degradados, brillos de letras y tarjetas suaves.
