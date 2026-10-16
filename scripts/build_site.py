@@ -2,25 +2,18 @@
 import os
 import json
 import re
-import html
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 PROJECT_DIR = os.path.dirname(BASE_DIR)
 DATA_FILE = os.path.join(PROJECT_DIR, "data", "songs.json")
 INDEX_FILE = os.path.join(PROJECT_DIR, "index.html")
+QUIEN_ES_FILE = os.path.join(PROJECT_DIR, "quien-es-lorena.html")
 
-def build():
-    if not os.path.exists(DATA_FILE):
-        print(f"Error: No existe {DATA_FILE}")
-        return
-
+def build_index():
     with open(DATA_FILE, "r", encoding="utf-8") as f:
         songs = json.load(f)
 
-    # Serializar songs a JSON seguro para incrustar en Alpine.js
     songs_json_escaped = json.dumps(songs, ensure_ascii=False)
-
-    # Estadísticas para el resumen del Hero
     total_canciones = len(songs)
     total_discos = len(set(s["album"] for s in songs))
     con_video = sum(1 for s in songs if s["has_video"])
@@ -80,7 +73,10 @@ def build():
         <a href="#inicio" class="hover:text-torbellino-coral transition">Inicio</a>
         <a href="#discos" class="hover:text-torbellino-coral transition">Discos</a>
         <a href="#catalogo" class="hover:text-torbellino-coral transition">Cancionero</a>
-        <a href="#sobre-mi" class="hover:text-torbellino-coral transition">Quién es Lorena</a>
+        <a href="quien-es-lorena.html" class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-torbellino-sand/60 hover:bg-torbellino-coral hover:text-white transition">
+          <span>✨</span>
+          <span>Quién es Lorena</span>
+        </a>
         <a href="#contacto" class="hover:text-torbellino-coral transition">Contacto</a>
       </nav>
 
@@ -108,7 +104,7 @@ def build():
       <a @click="mobileMenuOpen = false" href="#inicio" class="block py-2 text-[#4A3842] hover:text-torbellino-coral">Inicio</a>
       <a @click="mobileMenuOpen = false" href="#discos" class="block py-2 text-[#4A3842] hover:text-torbellino-coral">Discos Oficiales</a>
       <a @click="mobileMenuOpen = false" href="#catalogo" class="block py-2 text-[#4A3842] hover:text-torbellino-coral">Cancionero y Filtros</a>
-      <a @click="mobileMenuOpen = false" href="#sobre-mi" class="block py-2 text-[#4A3842] hover:text-torbellino-coral">Quién es Lorena</a>
+      <a href="quien-es-lorena.html" class="block py-2 text-torbellino-coral font-black">✨ Quién es Lorena (Biografía y Gags)</a>
       <a @click="mobileMenuOpen = false" href="#contacto" class="block py-2 text-[#4A3842] hover:text-torbellino-coral">Contacto</a>
       <div class="pt-2">
         <a href="https://www.youtube.com/@LorenaTorbellino?sub_confirmation=1" target="_blank" rel="noopener noreferrer" 
@@ -152,10 +148,9 @@ def build():
               <span>Explorar el Cancionero ({total_canciones} Temas)</span>
               <span>↓</span>
             </a>
-            <a href="https://www.youtube.com/@LorenaTorbellino?sub_confirmation=1" target="_blank" rel="noopener noreferrer" 
+            <a href="quien-es-lorena.html" 
                class="bg-white hover:bg-torbellino-sand/40 text-torbellino-plum border-2 border-torbellino-sand font-black px-7 py-3 rounded-full hover:border-torbellino-coral/50 transition duration-200 flex items-center gap-2 shadow-sm">
-              <svg class="w-4 h-4 text-red-600 fill-current" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
-              <span>Canal Oficial de YouTube</span>
+              <span>✨ Conoce a Lorena</span>
             </a>
           </div>
 
@@ -218,25 +213,31 @@ def build():
         <h2 class="text-xs font-extrabold uppercase tracking-widest text-torbellino-coral">Discografía</h2>
         <p class="text-3xl sm:text-4xl font-black text-torbellino-plum">Los 4 Álbumes Oficiales</p>
         <p class="text-sm text-[#6E5562]">
-          Haz clic en cualquier disco para filtrar el cancionero completo al instante.
+          Carátulas oficiales de alta fidelidad preparadas para plataformas digitales y distribución. Haz clic en cualquier disco para filtrar el cancionero.
         </p>
       </div>
 
-      <!-- Albums Cards -->
+      <!-- Albums Cards Grid -->
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         
         <!-- Disco 1 -->
         <div @click="filterByAlbum('cd1')" 
              :class="selectedAlbum === 'cd1' ? 'ring-4 ring-torbellino-coral border-torbellino-coral shadow-xl' : 'hover:border-torbellino-coral/50 shadow-sm hover:shadow-lg'"
-             class="group cursor-pointer bg-torbellino-cream rounded-3xl p-6 border-2 border-torbellino-sand transition-all duration-200 flex flex-col justify-between">
+             class="group cursor-pointer bg-torbellino-cream rounded-3xl p-5 border-2 border-torbellino-sand transition-all duration-200 flex flex-col justify-between">
           <div>
-            <div class="flex items-center justify-between mb-4">
+            <div class="flex items-center justify-between mb-3">
               <span class="px-3 py-1 rounded-full text-xs font-black bg-torbellino-coral text-white">CD 1</span>
               <span class="text-xs font-bold text-torbellino-wine">21 Temas</span>
             </div>
-            <div class="aspect-square rounded-2xl bg-gradient-to-br from-[#FFE3DC] to-[#FCD499]/60 flex items-center justify-center p-4 mb-4 border border-torbellino-sand group-hover:scale-105 transition duration-200">
-              <span class="text-5xl">☕</span>
+            
+            <!-- Real Album Cover -->
+            <div class="aspect-square rounded-2xl overflow-hidden shadow-md mb-4 border border-torbellino-sand/80 group-hover:scale-105 transition duration-300 relative">
+              <img src="assets/images/albums/cd1_cosas_de_la_vida_real_web.jpg" alt="Carátula oficial CD 1 - Cosas de la vida real" class="w-full h-full object-cover">
+              <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition flex items-end p-3">
+                <span class="text-[11px] font-black text-white bg-torbellino-coral px-2.5 py-1 rounded-full">Ver 21 temas</span>
+              </div>
             </div>
+
             <h3 class="text-lg font-black text-torbellino-plum mb-1.5 group-hover:text-torbellino-coral transition">
               Cosas de la vida real
             </h3>
@@ -253,15 +254,21 @@ def build():
         <!-- Disco 2 -->
         <div @click="filterByAlbum('cd2')" 
              :class="selectedAlbum === 'cd2' ? 'ring-4 ring-torbellino-denim border-torbellino-denim shadow-xl' : 'hover:border-torbellino-denim/50 shadow-sm hover:shadow-lg'"
-             class="group cursor-pointer bg-torbellino-cream rounded-3xl p-6 border-2 border-torbellino-sand transition-all duration-200 flex flex-col justify-between">
+             class="group cursor-pointer bg-torbellino-cream rounded-3xl p-5 border-2 border-torbellino-sand transition-all duration-200 flex flex-col justify-between">
           <div>
-            <div class="flex items-center justify-between mb-4">
+            <div class="flex items-center justify-between mb-3">
               <span class="px-3 py-1 rounded-full text-xs font-black bg-torbellino-denim text-white">CD 2</span>
               <span class="text-xs font-bold text-torbellino-wine">33 Temas</span>
             </div>
-            <div class="aspect-square rounded-2xl bg-gradient-to-br from-[#D9E6F2] to-[#B1CAB2]/60 flex items-center justify-center p-4 mb-4 border border-torbellino-sand group-hover:scale-105 transition duration-200">
-              <span class="text-5xl">⚡</span>
+            
+            <!-- Real Album Cover -->
+            <div class="aspect-square rounded-2xl overflow-hidden shadow-md mb-4 border border-torbellino-sand/80 group-hover:scale-105 transition duration-300 relative">
+              <img src="assets/images/albums/cd2_me_pasa_de_todo_web.jpg" alt="Carátula oficial CD 2 - Me pasa de todo" class="w-full h-full object-cover">
+              <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition flex items-end p-3">
+                <span class="text-[11px] font-black text-white bg-torbellino-denim px-2.5 py-1 rounded-full">Ver 33 temas</span>
+              </div>
             </div>
+
             <h3 class="text-lg font-black text-torbellino-plum mb-1.5 group-hover:text-torbellino-denim transition">
               Me pasa de todo
             </h3>
@@ -278,15 +285,21 @@ def build():
         <!-- Disco 3 -->
         <div @click="filterByAlbum('cd3')" 
              :class="selectedAlbum === 'cd3' ? 'ring-4 ring-torbellino-wine border-torbellino-wine shadow-xl' : 'hover:border-torbellino-wine/50 shadow-sm hover:shadow-lg'"
-             class="group cursor-pointer bg-torbellino-cream rounded-3xl p-6 border-2 border-torbellino-sand transition-all duration-200 flex flex-col justify-between">
+             class="group cursor-pointer bg-torbellino-cream rounded-3xl p-5 border-2 border-torbellino-sand transition-all duration-200 flex flex-col justify-between">
           <div>
-            <div class="flex items-center justify-between mb-4">
+            <div class="flex items-center justify-between mb-3">
               <span class="px-3 py-1 rounded-full text-xs font-black bg-torbellino-wine text-white">CD 3</span>
               <span class="text-xs font-bold text-torbellino-wine">32 Temas</span>
             </div>
-            <div class="aspect-square rounded-2xl bg-gradient-to-br from-[#F5D8E6] to-[#CAA5D9]/60 flex items-center justify-center p-4 mb-4 border border-torbellino-sand group-hover:scale-105 transition duration-200">
-              <span class="text-5xl">🌪️</span>
+            
+            <!-- Real Album Cover -->
+            <div class="aspect-square rounded-2xl overflow-hidden shadow-md mb-4 border border-torbellino-sand/80 group-hover:scale-105 transition duration-300 relative">
+              <img src="assets/images/albums/cd3_que_locura_web.jpg" alt="Carátula oficial CD 3 - Que locura" class="w-full h-full object-cover">
+              <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition flex items-end p-3">
+                <span class="text-[11px] font-black text-white bg-torbellino-wine px-2.5 py-1 rounded-full">Ver 32 temas</span>
+              </div>
             </div>
+
             <h3 class="text-lg font-black text-torbellino-plum mb-1.5 group-hover:text-torbellino-wine transition">
               Que locura
             </h3>
@@ -303,15 +316,21 @@ def build():
         <!-- Disco 4 -->
         <div @click="filterByAlbum('cd4')" 
              :class="selectedAlbum === 'cd4' ? 'ring-4 ring-torbellino-plum border-torbellino-plum shadow-xl' : 'hover:border-torbellino-plum/50 shadow-sm hover:shadow-lg'"
-             class="group cursor-pointer bg-torbellino-cream rounded-3xl p-6 border-2 border-torbellino-sand transition-all duration-200 flex flex-col justify-between">
+             class="group cursor-pointer bg-torbellino-cream rounded-3xl p-5 border-2 border-torbellino-sand transition-all duration-200 flex flex-col justify-between">
           <div>
-            <div class="flex items-center justify-between mb-4">
+            <div class="flex items-center justify-between mb-3">
               <span class="px-3 py-1 rounded-full text-xs font-black bg-torbellino-plum text-white">CD 4</span>
               <span class="text-xs font-bold text-torbellino-wine">24 Temas</span>
             </div>
-            <div class="aspect-square rounded-2xl bg-gradient-to-br from-[#FDE3CF] to-[#F87157]/40 flex items-center justify-center p-4 mb-4 border border-torbellino-sand group-hover:scale-105 transition duration-200">
-              <span class="text-5xl">🦴</span>
+            
+            <!-- Real Album Cover -->
+            <div class="aspect-square rounded-2xl overflow-hidden shadow-md mb-4 border border-torbellino-sand/80 group-hover:scale-105 transition duration-300 relative">
+              <img src="assets/images/albums/cd4_problemas_de_viejoven_web.jpg" alt="Carátula oficial CD 4 - Problemas de viejoven" class="w-full h-full object-cover">
+              <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition flex items-end p-3">
+                <span class="text-[11px] font-black text-white bg-torbellino-plum px-2.5 py-1 rounded-full">Ver 24 temas</span>
+              </div>
             </div>
+
             <h3 class="text-lg font-black text-torbellino-plum mb-1.5 group-hover:text-torbellino-coral transition">
               Problemas de viejoven
             </h3>
@@ -466,12 +485,12 @@ def build():
           <article class="bg-white rounded-3xl overflow-hidden border-2 border-torbellino-sand hover:border-torbellino-coral/60 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between group">
             
             <div>
-              <!-- Thumbnail Banner -->
+              <!-- Thumbnail Banner with Overlay for Pending Videos -->
               <div class="relative aspect-video bg-gradient-to-tr from-torbellino-peach/30 to-torbellino-sand overflow-hidden">
                 <img :src="song.cover_image" :alt="song.title" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" loading="lazy">
                 
                 <!-- Badge CD -->
-                <div class="absolute top-3 left-3 flex items-center gap-2">
+                <div class="absolute top-3 left-3 flex items-center gap-2 z-10">
                   <span class="px-2.5 py-0.5 rounded-full text-[11px] font-black text-white shadow-sm"
                         :class="song.album_id === 'cd1' ? 'bg-torbellino-coral' : (song.album_id === 'cd2' ? 'bg-torbellino-denim' : (song.album_id === 'cd3' ? 'bg-torbellino-wine' : 'bg-torbellino-plum'))"
                         x-text="song.album_badge">
@@ -482,16 +501,26 @@ def build():
                 </div>
 
                 <!-- Duration Badge -->
-                <div class="absolute bottom-3 right-3 bg-black/75 backdrop-blur-sm text-white text-[11px] font-mono font-bold px-2 py-0.5 rounded-md"
+                <div class="absolute bottom-3 right-3 bg-black/75 backdrop-blur-sm text-white text-[11px] font-mono font-bold px-2 py-0.5 rounded-md z-10"
                      x-text="song.duration">
                 </div>
 
-                <!-- Video Ready Indicator -->
+                <!-- Video Ready Indicator or Diagonal 'PRÓXIMAMENTE' Banner -->
                 <template x-if="song.has_video">
-                  <div class="absolute top-3 right-3 bg-red-600 text-white text-[10px] font-black px-2 py-0.5 rounded-full flex items-center gap-1 shadow-md">
+                  <div class="absolute top-3 right-3 bg-red-600 text-white text-[10px] font-black px-2 py-0.5 rounded-full flex items-center gap-1 shadow-md z-10">
                     <span>▶ Videoclip</span>
                   </div>
                 </template>
+
+                <template x-if="!song.has_video">
+                  <!-- Semi-transparent dark overlay with diagonal 'PRÓXIMAMENTE' ribbon -->
+                  <div class="absolute inset-0 bg-black/40 backdrop-blur-[1px] flex items-center justify-center overflow-hidden pointer-events-none">
+                    <div class="transform -rotate-12 bg-black/75 border-y-2 border-torbellino-peach/60 text-white text-xs md:text-sm font-black tracking-widest uppercase py-1.5 px-16 shadow-2xl text-center w-[120%] text-torbellino-peach">
+                      ⚡ Próximamente
+                    </div>
+                  </div>
+                </template>
+
               </div>
 
               <!-- Content Body -->
@@ -601,40 +630,32 @@ def build():
 
   </div>
 
-  <!-- About Lorena Section -->
-  <section id="sobre-mi" class="py-16 md:py-24 bg-white border-t border-torbellino-sand">
+  <!-- Teaser: Quién es Lorena -->
+  <section class="py-16 md:py-24 bg-white border-t border-torbellino-sand">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="bg-gradient-to-br from-torbellino-cream via-white to-torbellino-peach/20 rounded-3xl border-2 border-torbellino-sand p-8 md:p-14 shadow-lg">
+      <div class="bg-gradient-to-br from-torbellino-cream via-white to-torbellino-peach/30 rounded-3xl border-2 border-torbellino-sand p-8 md:p-14 shadow-lg">
         
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
           
           <div class="lg:col-span-4 flex justify-center">
-            <div class="relative w-56 h-56 rounded-full overflow-hidden border-4 border-torbellino-coral shadow-xl">
-              <img src="assets/images/lorena_avatar.jpg" alt="Foto de perfil de Lorena Torbellino" class="w-full h-full object-cover">
+            <div class="relative w-56 h-56 rounded-full overflow-hidden border-4 border-torbellino-coral shadow-xl group">
+              <img src="assets/images/lorena_avatar.jpg" alt="Foto de perfil de Lorena Torbellino" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
             </div>
           </div>
 
           <div class="lg:col-span-8 space-y-4 text-center lg:text-left">
-            <span class="text-xs font-extrabold uppercase tracking-widest text-torbellino-coral">Ficha de Identidad</span>
+            <span class="text-xs font-extrabold uppercase tracking-widest text-torbellino-coral">Ficha de Identidad & Poses</span>
             <h2 class="text-3xl sm:text-4xl font-black text-torbellino-plum">
-              ¿Quién es Lorena Torbellino?
+              ¿Quieres conocer las desgracias de Lorena a fondo?
             </h2>
             <p class="text-sm sm:text-base text-[#5C4550] leading-relaxed">
-              Lorena es una joven española de 20 años, carismática, alegre y con un toque descarado. Con su dulce voz casi infantil y sus inseparables zapatillas Converse rojas bajas, pone melodía a las pequeñas tragedias absurdas del día a día: la pereza legendaria, las compras compulsivas, las comidas quemadas y las crisis existenciales de viejoven.
+              Descubre su galería de poses, sus crisis de viejoven a los 20 años y las anécdotas más disparatadas de sus videoclips: desde chocarse contra una farola hasta el monstruo calamar del fregadero.
             </p>
-            <div class="pt-2 flex flex-wrap justify-center lg:justify-start gap-2">
-              <span class="px-3.5 py-1.5 rounded-full text-xs font-bold bg-white border border-torbellino-sand text-torbellino-plum shadow-sm">
-                👟 Converse Rojas Bajas
-              </span>
-              <span class="px-3.5 py-1.5 rounded-full text-xs font-bold bg-white border border-torbellino-sand text-torbellino-plum shadow-sm">
-                🎀 Moño Alto con Pinza Negra
-              </span>
-              <span class="px-3.5 py-1.5 rounded-full text-xs font-bold bg-white border border-torbellino-sand text-torbellino-plum shadow-sm">
-                ✨ Pecas en Nariz y Mejillas
-              </span>
-              <span class="px-3.5 py-1.5 rounded-full text-xs font-bold bg-white border border-torbellino-sand text-torbellino-plum shadow-sm">
-                🎵 Voz Dulce e Infantil
-              </span>
+            <div class="pt-2 flex flex-wrap justify-center lg:justify-start gap-4">
+              <a href="quien-es-lorena.html" class="inline-flex items-center gap-2 bg-gradient-to-r from-torbellino-coral to-torbellino-wine text-white font-extrabold px-6 py-3 rounded-full shadow-md shadow-torbellino-coral/25 hover:scale-105 transition">
+                <span>Ver Biografía Completa y Galería de Gags</span>
+                <span>→</span>
+              </a>
             </div>
           </div>
 
@@ -671,7 +692,7 @@ def build():
             <li><a href="#inicio" class="hover:text-torbellino-coral transition">Inicio</a></li>
             <li><a href="#discos" class="hover:text-torbellino-coral transition">Catálogo de Discos</a></li>
             <li><a href="#catalogo" class="hover:text-torbellino-coral transition">Cancionero ({total_canciones})</a></li>
-            <li><a href="#sobre-mi" class="hover:text-torbellino-coral transition">Sobre Lorena</a></li>
+            <li><a href="quien-es-lorena.html" class="hover:text-torbellino-coral transition">Quién es Lorena (Gags & Poses)</a></li>
           </ul>
         </div>
 
@@ -772,11 +793,341 @@ def build():
 </body>
 </html>
 '''
-
     with open(INDEX_FILE, "w", encoding="utf-8") as f:
         f.write(html_content)
+    print("index.html generado con éxito.")
 
-    print(f"index.html compilado con éxito ({len(songs)} canciones incrustadas).")
+
+def build_quien_es():
+    traits_data = [
+        {
+            "tag": "DESPISTADA CRÓNICA",
+            "tag_color": "bg-torbellino-coral text-white",
+            "title": "Chocarse con una farola y hacerse un cuerno",
+            "image": "assets/images/traits/trait_farola_cuerno.jpg",
+            "song_ref": "Una farola me puso cuerno (CD 1)",
+            "description": "Iba tan ensimismada mirando el móvil y riéndose de tonterías que se estampó de lleno contra una farola en pleno paso de cebra. El chichón resultante fue tan monumental que parecía un cuerno de unicornio mágico."
+        },
+        {
+            "tag": "CEGUERA SELECTIVA",
+            "tag_color": "bg-torbellino-denim text-white",
+            "title": "Buscar las gafas teniéndolas en la cabeza",
+            "image": "assets/images/traits/trait_gafas_perdidas.jpg",
+            "song_ref": "He Perdido las Gafas (CD 2)",
+            "description": "Media hora levantando cojines, abriendo cajones y entrando en pánico porque 'sin gafas no ve ni para freír un huevo'... mientras las gafas reposaban pacíficamente sosteniendo su característico moño alto."
+        },
+        {
+            "tag": "ORIENTACIÓN NULA",
+            "tag_color": "bg-torbellino-wine text-white",
+            "title": "Perder el coche en el parking del Carrefour",
+            "image": "assets/images/traits/trait_parking_carrefour.jpg",
+            "song_ref": "He Perdido el Coche en el Parking del Carrefour (CD 1)",
+            "description": "Entrar a comprar cuatro cosas y pasar dos horas recorriendo el nivel subterráneo B-3 apretando el mando a distancia con el brazo en alto como una antena viva para ver si algún coche parpadeaba."
+        },
+        {
+            "tag": "VIEJOVEN PREMATURA",
+            "tag_color": "bg-torbellino-plum text-white",
+            "title": "Lumbago fulminante a los 20 años",
+            "image": "assets/images/traits/trait_lumbago_viejoven.jpg",
+            "song_ref": "Me Ha Dado el Lumbago (CD 1)",
+            "description": "Se animó a bailar danza del vientre en el salón inspirada por un tutorial de internet y un crujido seco en la zona lumbar la dejó clavada en posición de estatua griega durante toda la tarde."
+        },
+        {
+            "tag": "PÁNICO DOMÉSTICO",
+            "tag_color": "bg-torbellino-coral text-white",
+            "title": "El calamar acecha en el fregadero",
+            "image": "assets/images/traits/trait_calamar_fregadero.jpg",
+            "song_ref": "El Calamar del Fregadero (CD 1)",
+            "description": "Acumular platos sucios durante tres días hasta que el desagüe cobró vida propia y emergió una criatura con tentáculos. Lorena huyó de su propia cocina equipada con el delantal y sus Converse."
+        },
+        {
+            "tag": "PELIGRO EN LA COCINA",
+            "tag_color": "bg-torbellino-wine text-white",
+            "title": "Emergencia lentejera con cacerola pegada",
+            "image": "assets/images/traits/trait_emergencia_lentejera.jpg",
+            "song_ref": "Emergencia Lentejera (CD 1)",
+            "description": "Poner la olla al fuego, irse a mirar vídeos de gatos y regresar cuando una nube de humo negro cubría el techo. Raspando el fondo quemado con una cuchara de palo descubrió un nuevo mineral."
+        },
+        {
+            "tag": "PEREZA LEGENDARIA",
+            "tag_color": "bg-torbellino-denim text-white",
+            "title": "Vivir en pijama y babuchas de pompón",
+            "image": "assets/images/traits/trait_babuchas_pompon.jpg",
+            "song_ref": "Babuchas de Pompón (CD 2)",
+            "description": "Dominio supremo del arte de no levantarse: apagar interruptores con la punta del pie, deslizarse por el parquet con babuchas de algodón y considerar que cambiar de postura en el sofá cuenta como cardio."
+        },
+        {
+            "tag": "OPTIMISTA INGENUA",
+            "tag_color": "bg-torbellino-mint text-torbellino-plum",
+            "title": "Aprender a nadar dentro de la bañera",
+            "image": "assets/images/traits/trait_nadar_banera.jpg",
+            "song_ref": "He Aprendido a Nadar en la Bañera (CD 1)",
+            "description": "Ponerse gafas de buceo, flotador de flamenco y llenar la bañera hasta el borde para entrenar natación sincronizada con patitos de goma antes de atreverse a ir a la piscina municipal."
+        },
+        {
+            "tag": "CAPRICHOSA IMPULSIVA",
+            "tag_color": "bg-torbellino-peach text-torbellino-plum",
+            "title": "Pasión desmedida por los chicharrones",
+            "image": "assets/images/traits/trait_chicharrones.jpg",
+            "song_ref": "Desde Que Probé Los Chicharrones (CD 1)",
+            "description": "Iba a empezar una dieta détox súper estricta de brotes verdes, pero se cruzó con una carnicería de pueblo, probó un torreznito crujiente y su vida cambió para siempre entre bailes de puro éxtasis gastronómico."
+        },
+        {
+            "tag": "MEMORIA PEZ",
+            "tag_color": "bg-torbellino-sand text-torbellino-plum",
+            "title": "Quedarse fuera de casa sin llaves",
+            "image": "assets/images/traits/trait_llaves_perdidas.jpg",
+            "song_ref": "Casa con Llaves (CD 1)",
+            "description": "Cerrar la puerta de un golpe seguro y darse cuenta de que las llaves se han quedado saludándola encima de la mesa del recibidor. Hora de charlar con el cerrajero de guardia."
+        },
+        {
+            "tag": "BOTÁNICA ACCIDENTAL",
+            "tag_color": "bg-torbellino-mint text-torbellino-plum",
+            "title": "Declararle la guerra a los topos del jardín",
+            "image": "assets/images/traits/trait_topos_huerta.jpg",
+            "song_ref": "Plaga de Topos (CD 1)",
+            "description": "Intentar cultivar una huerta ecológica ejemplar y acabar manteniendo negociaciones diplomáticas con una familia de topos súper organizados armados con gafas de sol."
+        },
+        {
+            "tag": "DESASTRE CULINARIO",
+            "tag_color": "bg-torbellino-coral text-white",
+            "title": "La catástrofe del gazpacho salpicado",
+            "image": "assets/images/traits/trait_gazpacho_salpicon.jpg",
+            "song_ref": "Gazpacho y Tomates (CD 2)",
+            "description": "Poner en marcha la batidora sin colocar bien la tapa superior. Resultado: un cuadro de arte expresionista rojo tomate cubriendo azulejos, lámparas y el flequillo de Lorena."
+        }
+    ]
+
+    cards_html = ""
+    for t in traits_data:
+        cards_html += f'''
+        <article class="bg-white rounded-3xl overflow-hidden border-2 border-torbellino-sand hover:border-torbellino-coral/60 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between group">
+          <div>
+            <div class="relative aspect-video overflow-hidden bg-torbellino-sand/40">
+              <img src="{t['image']}" alt="{t['title']}" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" loading="lazy">
+              <div class="absolute top-3 left-3">
+                <span class="px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider shadow-sm {t['tag_color']}">
+                  {t['tag']}
+                </span>
+              </div>
+            </div>
+            <div class="p-6">
+              <div class="text-[11px] font-bold text-torbellino-denim mb-1">
+                Gag oficial · {t['song_ref']}
+              </div>
+              <h3 class="text-lg font-black text-torbellino-plum group-hover:text-torbellino-coral transition leading-snug">
+                {t['title']}
+              </h3>
+              <p class="text-xs sm:text-sm text-[#5C4550] mt-2.5 leading-relaxed">
+                {t['description']}
+              </p>
+            </div>
+          </div>
+          <div class="px-6 pb-6 pt-1 flex items-center justify-between border-t border-torbellino-sand/60">
+            <span class="text-[11px] font-bold text-torbellino-wine">Perfil Canónico</span>
+            <span class="text-xs font-black text-torbellino-coral group-hover:translate-x-1 transition">👟 Lorena Torbellino</span>
+          </div>
+        </article>
+        '''
+
+    page_html = f'''<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quién es Lorena Torbellino — Biografía, Poses y Desastres Canónicos</title>
+  <meta name="description" content="Conoce la personalidad, señas de identidad y los desastres más cómicos de Lorena Torbellino a través de las poses de sus videoclips oficiales.">
+  <link rel="icon" type="image/png" href="assets/images/lorena_logo_oficial.png">
+  <link rel="stylesheet" href="assets/css/tailwind.css">
+  <script defer src="assets/js/alpine.min.js"></script>
+</head>
+<body class="min-h-screen bg-torbellino-cream font-sans antialiased text-[#291C22]" x-data="{{ mobileMenuOpen: false }}">
+
+  <!-- Top Announcement Bar -->
+  <aside aria-label="Aviso destacado" class="bg-gradient-to-r from-torbellino-coral via-torbellino-peach to-torbellino-coral text-torbellino-plum text-xs md:text-sm font-bold py-2 px-4 text-center shadow-inner flex items-center justify-center gap-2">
+    <span>👟</span>
+    <span>Perfil Oficial y Rasgos de Lorena Torbellino</span>
+    <a href="index.html#catalogo" class="underline hover:text-torbellino-wine transition ml-1 inline-flex items-center gap-1">
+      ← Volver al Cancionero
+    </a>
+  </aside>
+
+  <!-- Header / Navbar -->
+  <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-torbellino-sand shadow-sm transition">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      
+      <a href="index.html" class="flex items-center gap-3 group">
+        <div class="relative w-12 h-12 rounded-full overflow-hidden border-2 border-torbellino-coral shadow-md group-hover:scale-105 transition transform duration-200">
+          <img src="assets/images/lorena_avatar.jpg" alt="Lorena Torbellino" class="w-full h-full object-cover">
+        </div>
+        <div class="flex flex-col">
+          <span class="text-xl md:text-2xl font-black tracking-tight bg-gradient-to-r from-torbellino-coral to-torbellino-wine bg-clip-text text-transparent">
+            Lorena Torbellino
+          </span>
+          <span class="text-[11px] font-bold text-torbellino-denim tracking-wider uppercase">
+            Canciones y Desastres
+          </span>
+        </div>
+      </a>
+
+      <nav class="hidden md:flex items-center gap-7 font-bold text-sm text-[#4A3842]">
+        <a href="index.html" class="hover:text-torbellino-coral transition">Inicio</a>
+        <a href="index.html#discos" class="hover:text-torbellino-coral transition">Discos</a>
+        <a href="index.html#catalogo" class="hover:text-torbellino-coral transition">Cancionero</a>
+        <a href="quien-es-lorena.html" class="text-torbellino-coral font-black border-b-2 border-torbellino-coral pb-0.5">Quién es Lorena</a>
+        <a href="index.html#contacto" class="hover:text-torbellino-coral transition">Contacto</a>
+      </nav>
+
+      <div class="hidden md:flex items-center gap-4">
+        <a href="https://www.youtube.com/@LorenaTorbellino?sub_confirmation=1" target="_blank" rel="noopener noreferrer" 
+           class="inline-flex items-center gap-2 bg-gradient-to-r from-torbellino-coral to-torbellino-red text-white font-extrabold text-sm px-5 py-2.5 rounded-full shadow-md shadow-red-500/20 hover:scale-105 transition duration-200">
+          <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+          <span>Suscribirme al Canal</span>
+        </a>
+      </div>
+
+      <div class="md:hidden flex items-center">
+        <button @click="mobileMenuOpen = !mobileMenuOpen" type="button" class="p-2.5 rounded-2xl text-torbellino-plum hover:bg-torbellino-sand/50 transition" aria-label="Abrir menú">
+          <svg x-show="!mobileMenuOpen" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"/></svg>
+          <svg x-show="mobileMenuOpen" x-cloak class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+      </div>
+
+    </div>
+
+    <!-- Mobile Dropdown -->
+    <div x-show="mobileMenuOpen" x-cloak @click.away="mobileMenuOpen = false" class="md:hidden border-b border-torbellino-sand bg-white px-5 pt-3 pb-6 space-y-3 font-bold text-sm shadow-xl">
+      <a href="index.html" class="block py-2 text-[#4A3842]">Inicio</a>
+      <a href="index.html#discos" class="block py-2 text-[#4A3842]">Discos</a>
+      <a href="index.html#catalogo" class="block py-2 text-[#4A3842]">Cancionero</a>
+      <a href="quien-es-lorena.html" class="block py-2 text-torbellino-coral font-black">Quién es Lorena</a>
+      <a href="index.html#contacto" class="block py-2 text-[#4A3842]">Contacto</a>
+    </div>
+  </header>
+
+  <!-- Hero: Perfil de Lorena -->
+  <section class="py-12 md:py-18 bg-white border-b border-torbellino-sand relative overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+        
+        <div class="lg:col-span-5 flex justify-center">
+          <div class="relative w-full max-w-sm">
+            <div class="bg-gradient-to-tr from-torbellino-peach/50 to-torbellino-lilac/30 rounded-3xl p-6 border-4 border-white shadow-2xl">
+              <img src="assets/images/lorena_sticker_guiño.png" alt="Lorena Torbellino" class="w-full h-auto drop-shadow-lg">
+            </div>
+          </div>
+        </div>
+
+        <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+          
+          <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-torbellino-cream border border-torbellino-sand text-xs font-black text-torbellino-wine">
+            <span>✨</span>
+            <span>La Ficha de Personaje Oficial</span>
+          </div>
+
+          <h1 class="text-4xl sm:text-5xl font-black text-torbellino-plum tracking-tight leading-tight">
+            Quién es Lorena:
+            <span class="block bg-gradient-to-r from-torbellino-coral to-torbellino-wine bg-clip-text text-transparent">
+              Carisma, Dulzura y Desastre
+            </span>
+          </h1>
+
+          <p class="text-sm sm:text-base text-[#5C4550] leading-relaxed">
+            Lorena Torbellino es una joven española de 20 años emancipada, alegre, descarada y con una voz dulce como la miel. Su rasgo más característico es su don sobrenatural para que las cosas más rutinarias se conviertan en una comedia de enredos de proporciones bíblicas.
+          </p>
+
+          <!-- Badges de Atributos Fijos -->
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-2">
+            <div class="bg-torbellino-cream p-3.5 rounded-2xl border border-torbellino-sand text-center">
+              <div class="text-2xl mb-1">👟</div>
+              <div class="text-xs font-black text-torbellino-plum">Converse Rojas</div>
+              <div class="text-[10px] text-[#735A66]">Bajas y gastadas</div>
+            </div>
+            <div class="bg-torbellino-cream p-3.5 rounded-2xl border border-torbellino-sand text-center">
+              <div class="text-2xl mb-1">🎀</div>
+              <div class="text-xs font-black text-torbellino-plum">Pinza Negra</div>
+              <div class="text-[10px] text-[#735A66]">Moño alto despeinado</div>
+            </div>
+            <div class="bg-torbellino-cream p-3.5 rounded-2xl border border-torbellino-sand text-center">
+              <div class="text-2xl mb-1">✨</div>
+              <div class="text-xs font-black text-torbellino-plum">Pecas Cálidas</div>
+              <div class="text-[10px] text-[#735A66]">En nariz y mejillas</div>
+            </div>
+            <div class="bg-torbellino-cream p-3.5 rounded-2xl border border-torbellino-sand text-center">
+              <div class="text-2xl mb-1">🎙️</div>
+              <div class="text-xs font-black text-torbellino-plum">Voz Dulce</div>
+              <div class="text-[10px] text-[#735A66]">Cero pudor cómico</div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Poses & Gags Gallery -->
+  <section class="py-16 md:py-24">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center max-w-2xl mx-auto mb-14 space-y-3">
+        <span class="text-xs font-extrabold uppercase tracking-widest text-torbellino-coral">Galería de Desventuras</span>
+        <h2 class="text-3xl sm:text-4xl font-black text-torbellino-plum">Cosas que le Han Pasado a Lorena</h2>
+        <p class="text-sm text-[#6E5562]">
+          Un recorrido visual por las poses y gags de sus videoclips oficiales que definen su personalidad arrolladora y divertida.
+        </p>
+      </div>
+
+      <!-- Traits Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {cards_html}
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Back to Music CTA -->
+  <section class="py-16 bg-white border-t border-torbellino-sand text-center">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4">
+      <span class="text-4xl">🎵</span>
+      <h2 class="text-2xl sm:text-3xl font-black text-torbellino-plum">
+        ¡Escucha todas estas historias cantadas con ritmo!
+      </h2>
+      <p class="text-sm text-[#6B5660] max-w-xl mx-auto">
+        Explora los 4 álbumes y las 110 canciones completas en el cancionero oficial interactivo.
+      </p>
+      <div class="pt-2 flex justify-center gap-4">
+        <a href="index.html#catalogo" class="bg-gradient-to-r from-torbellino-coral to-torbellino-wine text-white font-extrabold px-8 py-3.5 rounded-full shadow-lg shadow-torbellino-coral/25 hover:scale-105 transition">
+          Ver las 110 Canciones Oficiales →
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-torbellino-dark text-white pt-14 pb-12 border-t-4 border-torbellino-coral">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col sm:flex-row items-center justify-between text-xs text-white/60 gap-4">
+        <div>
+          ℗ & © 2026 Lorena Torbellino · Contacto: <span class="text-torbellino-peach font-semibold">public@raupulus.dev</span>
+        </div>
+        <div>
+          <a href="index.html" class="text-white hover:text-torbellino-coral transition">Volver a la portada principal</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
+'''
+    with open(QUIEN_ES_FILE, "w", encoding="utf-8") as f:
+        f.write(page_html)
+    print("quien-es-lorena.html generado con éxito.")
+
 
 if __name__ == "__main__":
-    build()
+    build_index()
+    build_quien_es()

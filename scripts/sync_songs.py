@@ -104,6 +104,14 @@ for album_name, alb_meta in albums_info.items():
         has_video = any(f.endswith("_1080p_watermark.mp4") for f in os.listdir(s_path))
         relato_id, relato_label = infer_relato_category(clean_title, lyrics, album_name)
         
+        album_cover_map = {
+            'cd1': 'assets/images/albums/cd1_cosas_de_la_vida_real_web.jpg',
+            'cd2': 'assets/images/albums/cd2_me_pasa_de_todo_web.jpg',
+            'cd3': 'assets/images/albums/cd3_que_locura_web.jpg',
+            'cd4': 'assets/images/albums/cd4_problemas_de_viejoven_web.jpg'
+        }
+        default_cover = album_cover_map.get(alb_meta['id'], 'assets/images/lorena_avatar.jpg')
+
         song_entry = {
             "id": global_id,
             "track_number": track_num,
@@ -121,7 +129,7 @@ for album_name, alb_meta in albums_info.items():
             "lyrics": lyrics,
             "has_video": has_video,
             "has_custom_cover": has_custom_cover,
-            "cover_image": f"assets/images/covers/{cover_filename}" if has_custom_cover else "assets/images/lorena_avatar.jpg",
+            "cover_image": f"assets/images/covers/{cover_filename}" if has_custom_cover else default_cover,
             "youtube_id": "",
             "youtube_url": "https://www.youtube.com/@LorenaTorbellino"
         }
