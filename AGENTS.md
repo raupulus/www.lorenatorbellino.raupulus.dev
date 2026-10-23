@@ -246,8 +246,15 @@ La paleta se define en `tailwind.config.js` bajo el espacio de nombres `torbelli
 >    - **PROHIBIDO:** Jamás hacer referencia a software o herramientas de inteligencia artificial (Suno, Midjourney, Kling, Whisper, etc.) ni de edición de vídeo.
 > 3. **FORMATO OBLIGATORIO DE TÍTULO:**
 >    - Siempre `{Título de la Canción} - Lorena Torbellino (Videoclip Oficial)` (longitud < 100 caracteres).
-> 4. **ASOCIACIÓN OBLIGATORIA A LA LISTA DE REPRODUCCIÓN DEL DISCO:**
->    - Al subir cualquier canción, debe añadirse automáticamente a la lista de reproducción oficial de su álbum (*Cosas de la vida real*, *Me pasa de todo*, *Que locura*, *Problemas de viejoven*).
+> 4. **DOBLE ASOCIACIÓN OBLIGATORIA A LISTAS DE REPRODUCCIÓN:**
+>    - Al subir cualquier canción, debe añadirse de forma obligatoria a **DOS listas**:
+>      1. **La lista oficial del álbum:**
+>         - *Cosas de la vida real*: `PLPwZENVaGzdg`
+>         - *Me pasa de todo*: `PLaL95oSelBkw`
+>         - *Que locura*: Lista del disco correspondiente.
+>         - *Problemas de viejoven*: Lista del disco correspondiente.
+>      2. **La lista global que une todos los discos:**
+>         - *Lorena Torbellino - Discografía Completa (Todos los Videoclips)*: `PLIBYuJ5Rb82M`.
 > 5. **SINCRONIZACIÓN INMEDIATA DE METADATOS:**
 >    - Cada vez que se sube un vídeo, se actualiza automáticamente su archivo JSON en `metadata/` (`cdX_<disco>.json`) y `historial_subidas_youtube.json`, registrando `youtube_id`, `youtube_url`, `has_video: true` y la fecha de publicación.
 > 6. **DECLARACIÓN DE CONTENIDO MODIFICADO EN YOUTUBE STUDIO:**
