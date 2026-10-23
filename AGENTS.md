@@ -229,3 +229,31 @@ La paleta se define en `tailwind.config.js` bajo el espacio de nombres `torbelli
 > - En Plataformas / DSPs:  
 >   `{Título de la Canción}` (estrictamente el nombre limpio de la pista, sin sufijos de artista ni número de pista).
 > - **PROHIBIDO:** NUNCA colocar "Lorena Torbellino" antes del título de la pista en los vídeos de YouTube.
+
+---
+
+## 8. REGLAS ESTRICTAS DE PUBLICACIÓN Y SUBIDA A YOUTUBE
+
+> [!CAUTION]
+> **REGLAS PERMANENTES DE SUBIDA A YOUTUBE:**
+> 1. **PROHIBICIÓN TOTAL DE SUBIDA AUTÓNOMA:**
+>    - NUNCA subir vídeos de forma automática ni autónoma tras su renderizado.
+>    - El usuario DEBE revisarlos previamente de forma manual en local.
+>    - Solo se sube a YouTube bajo orden expresa y manual del usuario.
+> 2. **POLÍTICA DE PROPIEDAD INTELECTUAL Y CERO MENCIONES A IA / HERRAMIENTAS:**
+>    - La letra de todas las canciones es **propiedad intelectual exclusiva del autor/creador**.
+>    - **PROHIBIDO:** No debe aparecer "IA" o "AI" por ningún sitio en metadatos, descripciones, etiquetas ni títulos (salvo el título cómico de la canción ficticia "La IA Se Ha Comido a Mi Perro").
+>    - **PROHIBIDO:** Jamás hacer referencia a software o herramientas de inteligencia artificial (Suno, Midjourney, Kling, Whisper, etc.) ni de edición de vídeo.
+> 3. **FORMATO OBLIGATORIO DE TÍTULO:**
+>    - Siempre `{Título de la Canción} - Lorena Torbellino (Videoclip Oficial)` (longitud < 100 caracteres).
+> 4. **ASOCIACIÓN OBLIGATORIA A LA LISTA DE REPRODUCCIÓN DEL DISCO:**
+>    - Al subir cualquier canción, debe añadirse automáticamente a la lista de reproducción oficial de su álbum (*Cosas de la vida real*, *Me pasa de todo*, *Que locura*, *Problemas de viejoven*).
+> 5. **SINCRONIZACIÓN INMEDIATA DE METADATOS:**
+>    - Cada vez que se sube un vídeo, se actualiza automáticamente su archivo JSON en `metadata/` (`cdX_<disco>.json`) y `historial_subidas_youtube.json`, registrando `youtube_id`, `youtube_url`, `has_video: true` y la fecha de publicación.
+> 6. **DECLARACIÓN DE CONTENIDO MODIFICADO EN YOUTUBE STUDIO:**
+>    - La API pública v3 de Google no expone aún el campo de contenido sintético en `videos.insert`. Por tanto, al revisar el vídeo subido (en estado privado), debe verificarse y marcarse en YouTube Studio la casilla "Contenido alterado o sintético".
+> 7. **ESTADO DE PRIVACIDAD OBLIGATORIO: SIEMPRE EN PRIVADO (`private`):**
+>    - **NUNCA EN OCULTO (`unlisted`) NI EN PÚBLICO.**
+>    - Todas las subidas a YouTube se realizan de forma obligatoria y estricta en estado **PRIVADO (`private`)**.
+>    - Queda terminantemente prohibido usar el estado "oculto" o "no listado" (`unlisted`). El creador es el único que revisa el vídeo en privado en YouTube Studio y decide cuándo y cómo publicarlo.
+
