@@ -876,8 +876,8 @@ window.CATALOGO_SONGS = [
     "synopsis": "Canción de comedia del álbum 'Me pasa de todo' de Lorena Torbellino.",
     "lyrics": "",
     "has_video": false,
-    "has_custom_cover": false,
-    "cover_image": "assets/images/albums/cd2_me_pasa_de_todo_web.webp",
+    "has_custom_cover": true,
+    "cover_image": "assets/images/covers/cd2-paella-sin-probar.webp",
     "youtube_id": "",
     "youtube_url": "https://www.youtube.com/@LorenaTorbellino"
   },
