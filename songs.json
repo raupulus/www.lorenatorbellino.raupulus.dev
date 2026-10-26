@@ -771,8 +771,8 @@
     "synopsis": "Estaba yo tan tranquila en el jardín estrenando mi sombrero de paja favorito... ¡cuando vino un vendaval travieso y se lo llevó volando por encima de los tejados! Llevo tres días corriendo detrás de él por toda la ciudad: se ha subido a la torre del parque, ha hecho piruetas en los charcos y hasta le pregunté al cartero y a las palomas. ¡Si lo atrapo hoy, le pongo un lazo rojo para que no se me vuelva a escapar jamás! 👒💨🎈✨",
     "lyrics": "",
     "has_video": false,
-    "has_custom_cover": false,
-    "cover_image": "assets/images/albums/cd2_me_pasa_de_todo_web.webp",
+    "has_custom_cover": true,
+    "cover_image": "assets/images/covers/cd2-mi-sombrero-ha-salido-volando.webp",
     "youtube_id": "",
     "youtube_url": "https://www.youtube.com/@LorenaTorbellino"
   },
