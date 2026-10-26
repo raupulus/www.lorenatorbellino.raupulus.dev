@@ -813,8 +813,8 @@ window.CATALOGO_SONGS = [
     "synopsis": "Esta mañana mi abuela me sentó en una banqueta, sacó el peine de púas finas y me hizo un moño tan pero tan apretado que me estiró las cejas hacia las sienes... ¡y ahora no puedo dejar de sonreír ni aunque quiera! Intento ponerme seria frente al espejo y me da la risa; intento regañar y suelto una carcajada; y en la foto del cole salgo enseñando hasta la última muela. ¡Cuando me lo suelten ya me enfadaré, pero mientras tanto prefiero seguir feliz! 😂👵🎀✨",
     "lyrics": "",
     "has_video": false,
-    "has_custom_cover": false,
-    "cover_image": "assets/images/albums/cd2_me_pasa_de_todo_web.webp",
+    "has_custom_cover": true,
+    "cover_image": "assets/images/covers/cd2-mono-apretado.webp",
     "youtube_id": "",
     "youtube_url": "https://www.youtube.com/@LorenaTorbellino"
   },
