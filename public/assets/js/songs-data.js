@@ -792,8 +792,8 @@ window.CATALOGO_SONGS = [
     "synopsis": "Monté un corralito monísimo en una esquina de mi cuarto con cajas de zapatos, cojines y sábanas blancas para cuidar a mis tres \"ovejitas enanas\"... Les puse campanitas doradas, lacitos rojos y les daba besos en la panza. Pero el día que quise esquilarlas para tejerme un suéter... ¡no salió lana, salió cola rosa, bigotes y un chillidito travieso! ¿Oveja o rata? ¡Qué más da! Son las mascotas más cariñosas del mundo y duermen conmigo bajo la manta. 😂🐑🐭🧀✨",
     "lyrics": "",
     "has_video": false,
-    "has_custom_cover": false,
-    "cover_image": "assets/images/albums/cd2_me_pasa_de_todo_web.webp",
+    "has_custom_cover": true,
+    "cover_image": "assets/images/covers/cd2-mis-tres-ovejas-eran-ratas.webp",
     "youtube_id": "",
     "youtube_url": "https://www.youtube.com/@LorenaTorbellino"
   },
