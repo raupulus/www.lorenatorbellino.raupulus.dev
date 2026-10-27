@@ -832,12 +832,12 @@ window.CATALOGO_SONGS = [
     "relato_id": "citas-social",
     "relato_label": "Citas & Vida Social",
     "synopsis": "Canción de comedia del álbum 'Me pasa de todo' de Lorena Torbellino.",
-    "lyrics": "",
-    "has_video": false,
+    "lyrics": "Me puse mi camisa,\nzapatos que brillan bien.\nPeiné todas mis trencitas,\nhoy me va a ir re bien.\n\nLlegué muy tempranito,\nme sudaba hasta el lápiz.\nPregunté por el bañito,\nantes de ir a la raíz.\n\nFui al baño antes de una entrevista\ny no quedaba papel.\nMe quedé quietita en la casita:\n¿Y ahora qué hago? ¿Pastel?\nAy, ay, ay...\n\nFui al baño antes de una entrevista,\nme quería desaparecer.\nPero empecé a reírme solita\nporque me había tocado perder.\n\nLa puerta se arruinó,\nyo miraba mi reloj.\nPensaba: si tardo tanto,\nvan a creer que me escondió.\n\nBusqué en cada rinconcito,\ncomo en cueva de miel.\nHasta revisé mi bolsito:\n¡solo encontré un caramelo!\n\nFui al baño antes de una entrevista\ny no quedaba papel.\nMi carita roja, rojita,\ncomo tomate en mantel.\n\nFui al baño antes de una entrevista,\nme quería derretir.\nPero al final salí despacito,\ncon tantas ganas de reír.\n\nTocaron la puerta: ¿estás bien ahí?\nYa casi salgo, respondí.\nConté hasta diez, luego hasta cien,\ny respiré muy fuerte también.\n\nAbrí la puerta, me miró el señor,\nyo me empecé a sonrojar.\nMe dijo suave: tranquila, mi flor,\na todos puede pasar.\n\nHablando antes de una entrevista\ny no quedaba papel.\nY al contarlo se me quita\ntodo el miedo en la piel.\n\nAntes de una entrevista\nya me lo puedo reír.\nSi la vida se pone así rarita,\nes para aprender y seguir.\n¡La la la!",
+    "has_video": true,
     "has_custom_cover": true,
     "cover_image": "assets/images/covers/cd2-no-quedaba-papel.webp",
-    "youtube_id": "",
-    "youtube_url": "https://www.youtube.com/@LorenaTorbellino"
+    "youtube_id": "aMslTR06tlk",
+    "youtube_url": "https://www.youtube.com/watch?v=aMslTR06tlk"
   },
   {
     "id": 41,
@@ -853,12 +853,12 @@ window.CATALOGO_SONGS = [
     "relato_id": "citas-social",
     "relato_label": "Citas & Vida Social",
     "synopsis": "Canción de comedia del álbum 'Me pasa de todo' de Lorena Torbellino.",
-    "lyrics": "",
-    "has_video": false,
+    "lyrics": "Oh, oh, oh, oh, oh...\nOh, oh, oh, oh, oh...\n\nHoy busqué en mi cajón,\nun azul y otro limón.\nUno tiene un unicornio,\nel otro solo un corazón.\n\nMamá dice: mira bien,\nvan en pareja y ya lo ves.\nPero yo río y digo fuerte,\ncomo si fuera mi ley:\n\nNunca me pongo los calcetines a juego,\nuno va bailando, el otro va en otro juego.\nSaltan y giran cada pie con su deseo,\nnunca me pongo los calcetines a juego,\n¡así me siento mejor!\n\nEn la escuela me miró\nmi mejor amiga Inés:\n«Tienes nubes y sandías,\n¿cómo hiciste eso? ¿Ves?»\n\nLe presté uno de lunares,\nella me dio uno de flor,\ny caminamos por el patio\ncon un desfile de color.\n\nNunca me pongo los calcetines a juego,\nuno va bailando, el otro va en otro juego.\nSaltan y giran cada pie con su deseo,\nnunca me pongo los calcetines a juego...\n¡La, la, la!\n¡Así me siento mejor!\n\nHoy rayas, mañana estrellas,\nhe pasado a puntitos miel.\nSi cambian mis calcetines,\ntambién puede cambiarme la piel.\n\nQue cada uno sea distinto,\ncomo mi risa y mi voz.\nSi me miras de cerquita,\nvas a querer uno de los dos.\n\nNunca me pongo los calcetines a juego,\nuno va bailando, el otro va en otro juego.\nSaltan y giran cada pie con su deseo,\nnunca me pongo los calcetines a juego,\n¡oh yeah!\n¡Así me siento mejor!\n\nUno verde, otro rosado,\nya estoy lista, ya me voy.\nSiempre que miro mis pies,\nme acuerdo de lo que soy.",
+    "has_video": true,
     "has_custom_cover": true,
     "cover_image": "assets/images/covers/cd2-nunca-me-pongo-los-calcetines-a-juego.webp",
-    "youtube_id": "",
-    "youtube_url": "https://www.youtube.com/@LorenaTorbellino"
+    "youtube_id": "4jFmi7KIcx0",
+    "youtube_url": "https://www.youtube.com/watch?v=4jFmi7KIcx0"
   },
   {
     "id": 42,
@@ -874,12 +874,12 @@ window.CATALOGO_SONGS = [
     "relato_id": "desastres-absurdos",
     "relato_label": "Desastres Cotidianos",
     "synopsis": "Canción de comedia del álbum 'Me pasa de todo' de Lorena Torbellino.",
-    "lyrics": "",
-    "has_video": false,
+    "lyrics": "Hoy tengo una receta\nque quiero probar.\nEché arroz como montaña\ny el tomate sin contar.\nMe miraba la cuchara:\n«Hoy sí que te va a gustar».\n\nHe aprendido a cocinar paella\ny me he quedado sin comer.\nTodos vienen, todos se la llevan\ny mi plato sigue sin aparecer.\nHe aprendido a cocinar paella\ny se la doy a todo el mundo, ya lo sé.\nPero al final de tanta, tanta fiesta,\nyo soy la única que se queda sin pastel.\n\nMi abuela apunta en la libreta:\n«Un poquito más de sal».\nYo revuelvo muy contenta,\nse me olvida respirar.\nMis primitos hacen cola\npara volver a repetir.\nCuando miro en la paellera...\n¡queda un grano para mí!\n\nHe aprendido a cocinar paella\ny me he quedado sin comer.\nTodos vienen, todos se la llevan\ny mi plato sigue sin aparecer.\nHe aprendido a cocinar paella\ny se la doy a todo el mundo, ya lo sé.\nQue la próxima que haga,\nme guardo un ladito solo para mí también.\n\nSi hoy te invito a mi mesa,\nme dejas un poquito al final.\nQue mis manos ya saben la receta,\npero mi barriga protesta de verdad.\n\nHe aprendido a cocinar paella\ny me he quedado sin comer.\nTodos vienen, todos se la llevan\ny mi plato sigue sin aparecer.\nHe aprendido a cocinar paella\ny se la doy a todo el mundo, ya lo sé.\nLa próxima vez que todos vengan,\nprimero sirvo mi platito\ny luego lo demás también.",
+    "has_video": true,
     "has_custom_cover": true,
     "cover_image": "assets/images/covers/cd2-paella-sin-probar.webp",
-    "youtube_id": "",
-    "youtube_url": "https://www.youtube.com/@LorenaTorbellino"
+    "youtube_id": "UMGR5cFVVKA",
+    "youtube_url": "https://www.youtube.com/watch?v=UMGR5cFVVKA"
   },
   {
     "id": 43,
@@ -895,12 +895,12 @@ window.CATALOGO_SONGS = [
     "relato_id": "citas-social",
     "relato_label": "Citas & Vida Social",
     "synopsis": "Canción de comedia del álbum 'Me pasa de todo' de Lorena Torbellino.",
-    "lyrics": "",
-    "has_video": false,
+    "lyrics": "Ey, ey, ey...\nMmm, mmm, mmm...\nAy, ey, ey, ey, ey...\nEy, ey, ey...\n\nEl niño que me gusta\ndice que estoy loca,\nporque pedí pizza con piña\ny ya no se acerca a mi boca.\n\nSe rió con sus amigos,\nyo me quedé a medias risas,\nmordiendo la orilla fría,\nmirando caer la ceniza.\n\nEl niño que me gusta dice que estoy loca,\npedí pizza con piña y ya no se acerca a mi boca.\nPero a mí me encanta dulce con reto a la vez,\nsi no prueba mi pizza tampoco me va a entender.\n\nEl niño que me gusta dice que estoy loca,\npedí pizza con piña y se aleja poquito a poco.\nPero yo la muerdo, canto y me empiezo a creer\nque tal vez esté loco el que no me quiera ver.\n\nSu cara de tragedia,\ncomo si fuera un delito.\nYo solo dije «una grande»\ny todo cambió en un grito.\n\nSus ojos como tomates,\nel queso se derritió.\nPero más rápido aún,\nse derritió su amor.\n\nEl niño que me gusta dice que estoy loca,\npedí pizza con piña y ya no se acerca a mi boca.\nPero a mí me encanta dulce con reto a la vez,\nsi no prueba mi pizza tampoco me va a entender.\n\nEl niño que me gusta dice que estoy loca,\npedí pizza con piña y se aleja poquito a poco.\nPero yo la muerdo, canto y me empiezo a creer\nque tal vez esté loco el que no me quiera ver.\n\nSi por una rebanada\ncorre lejos de mí,\nmejor que se vaya,\nahora no lo quiero aquí.\n\nPorque el amor que yo quiero\nse sienta a compartir,\ny aunque pida otra cosa,\nme deje ser feliz.\n\nEl niño que me gusta dice que estoy loca,\npedí pizza con piña y ya no se acerca a mi boca.\nPero a mí me encanta dulce con reto a la vez,\nsi no prueba mi pizza tampoco me va a entender.\n\nEl niño que me gusta dice que estoy loca,\npedí pizza con piña y se aleja poquito a poco.\nYo sigo cantando, bailando, volviendo a creer:\n¡que quien ame mi pizza, ese sí me va a querer!\n\n¡Gracias!",
+    "has_video": true,
     "has_custom_cover": true,
     "cover_image": "assets/images/covers/cd2-pizza-con-pina.webp",
-    "youtube_id": "",
-    "youtube_url": "https://www.youtube.com/@LorenaTorbellino"
+    "youtube_id": "X_i28VJEuLU",
+    "youtube_url": "https://www.youtube.com/watch?v=X_i28VJEuLU"
   },
   {
     "id": 44,
@@ -916,12 +916,12 @@ window.CATALOGO_SONGS = [
     "relato_id": "campo-animales",
     "relato_label": "Animales & Campo",
     "synopsis": "Canción de comedia del álbum 'Me pasa de todo' de Lorena Torbellino.",
-    "lyrics": "",
-    "has_video": false,
+    "lyrics": "Hey, hey, hey, hey, la...\n¡Woo!\nHey, hey, hey, hey...\n\nEn casa de la abuela\nsiempre hay gran banquete:\nun caldo que da vueltas\ny un guiso que revierte.\n\nMe sirven un platito,\nme pongo muy feliz,\npero a los cinco minutos\nempiezo a hacer chis-chis.\n¡Hey, hey!\n\nLos platos de potaje\na mí me dan gases,\nme voy inflando\ncomo si en disfraces.\nDa igual cuánto estornude,\nque no hay como lo disfrace:\n¡se me escapan, se me escapan,\nay, qué desastre!\n\nMi tía se da cuenta,\nme mira y hace: «¡Uf!».\nYo aprieto bien la panza,\nme pongo roja: «¡Puf!».\nEl perro me hace coros,\nse oye por el sofá.\nMi abuelo se hace el loco\ny dice: «¡Fui yo, ya está!».\n\nLos platos de potaje\na mí me dan gases,\nme voy inflando\ncomo si en disfraces.\nDa igual cuánto estornude,\nque no hay como lo disfrace:\n¡se me escapan, se me escapan,\nay, qué desastre!\n\nHe probado con la sopa,\ncon arroz y con puré,\npero cuando hay ese guiso,\notra vez vuelvo a correr.\n\nLos platos de potaje\na mí me dan gases,\nme voy inflando\ncomo si en disfraces.\nDa igual cuánto estornude,\nque no hay como lo disfrace:\n¡se me escapan, se me escapan,\nay, qué desastre!",
+    "has_video": true,
     "has_custom_cover": true,
     "cover_image": "assets/images/covers/cd2-potaje-y-pedos.webp",
-    "youtube_id": "",
-    "youtube_url": "https://www.youtube.com/@LorenaTorbellino"
+    "youtube_id": "SXBp1GsneDY",
+    "youtube_url": "https://www.youtube.com/watch?v=SXBp1GsneDY"
   },
   {
     "id": 45,
