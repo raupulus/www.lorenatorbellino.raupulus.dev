@@ -17,6 +17,10 @@
   - **Handle Oficial:** `@LorenaTorbellino` (alternativo: `@LorenaTorbellinoOficial`)
   - **Enlace:** `https://www.youtube.com/@LorenaTorbellino`
   - **Enlace de suscripción directa:** `https://www.youtube.com/@LorenaTorbellino?sub_confirmation=1`
+- **Redes Sociales Oficiales:**
+  - **TikTok:** `@lorenatorbellino` — `https://www.tiktok.com/@lorenatorbellino`
+  - **Instagram:** `@lorenatorbellino` — `https://www.instagram.com/lorenatorbellino/`
+  - **Twitter / X:** `@loretorbellino` — `https://x.com/loretorbellino` (14 caracteres; máx. 15 en X)
 - **Catálogo Oficial de Discos (Actualmente 4 Álbumes y en expansión):**
   1. `Cosas de la vida real` (CD 1 - 21 Canciones)
   2. `Me pasa de todo` (CD 2 - 33 Canciones)
